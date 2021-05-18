@@ -1,14 +1,13 @@
 status = False
 try:
     import snap
-    version = snap.Version
-    i = snap.TInt(5)
-    if i == 5:
-        status = True
+    import graph_tools
+    import networkx
+    status = True
 except:
     pass
 
 if status:
-    print("SUCCESS, your version of Snap.py is %s" % (version))
+    print("SUCCESS, Snap, graph_tools and networkx are installed")
 else:
-    print("*** ERROR, no working Snap.py was found on your computer")
+    print("*** ERROR, something is missing")
