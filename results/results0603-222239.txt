@@ -1,0 +1,4 @@
+Moritzs-MacBook-Pro.local,rand_neanet,attribute,1000,10000,03/Jun/2021:22:22:39,2,2
+Moritzs-MacBook-Pro.local,rand_neanet,attribute,1000,100000,03/Jun/2021:22:22:39,2,2
+Moritzs-MacBook-Pro.local,rand_neanet,attribute,10000,100000,03/Jun/2021:22:22:39,2,2
+Moritzs-MacBook-Pro.local,rand_neanet,attribute,10000,1000000,03/Jun/2021:22:22:40,2,2
