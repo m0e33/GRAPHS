@@ -1,0 +1,14 @@
+Benchmark1:
+  lib: "snap"
+  dataset_path: "sample_path/path"
+  algorithm: "CNM"
+
+Benchmark2:
+  lib: "networkx"
+  dataset_path: "another_sample_path/path"
+  algorithm: "SBM"
+
+Benchmark3:
+  lib: "graphtool"
+  dataset_path: "another_data_set_path/path"
+  algorithm: "fancy"
