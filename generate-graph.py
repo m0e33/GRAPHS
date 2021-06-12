@@ -1,5 +1,8 @@
 from snap.snap import LoadEdgeList, TUNGraph, SaveEdgeList
 import math
+import logging
+
+logging.basicConfig(level=logging.DEBUG)
 
 def intro():
 
