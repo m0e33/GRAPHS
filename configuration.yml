@@ -1,6 +1,6 @@
 Benchmark1:
   lib: "snap"
-  dataset_path: "sample_path/path"
+  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
   algorithm: "CNM"
 
 Benchmark2:

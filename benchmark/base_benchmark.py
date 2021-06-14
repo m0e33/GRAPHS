@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+import logging
 
 
 class Benchmark(ABC):
@@ -21,10 +22,31 @@ class Benchmark(ABC):
 
     def __init__(self, config: Configuration):
         self._config = config
+        self._logger = logging.getLogger(self._config.name)
+
+        self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
+
+    def run(self) -> None:
+        self._get_graph()
+        self._run_algorithm()
+        # self._collect_results()
 
     @abstractmethod
-    def run(self) -> None:
+    def _get_graph(self):
         pass
+
+    @abstractmethod
+    def _run_algorithm(self):
+        pass
+
+    # @abstractmethod
+    # def _collect_results(self):
+    #     pass
+
 
     def __repr__(self):
         return str(self._config)
+
+
+class AlgorithmNotFound(Exception):
+    pass
