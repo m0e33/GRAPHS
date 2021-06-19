@@ -3,10 +3,10 @@
 #  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
 #  algorithm: "CNM"
 
-#Benchmark2:
-#  lib: "networkx"
-#  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
-#  algorithm: "girvan_newman"
+Benchmark2:
+  lib: "networkx"
+  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
+  algorithm: "girvan_newman"
 
 #Benchmark3:
 #  lib: "graphtool"

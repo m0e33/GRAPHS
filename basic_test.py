@@ -2,6 +2,7 @@ from benchmark.snap_benchmark import SnapBenchmark
 from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
 import sys
+from benchmark.benchmark_runner import BenchmarkRunner
 
 
 
@@ -15,5 +16,6 @@ if __name__ == "__main__":
          "*************************************************\n")
 
     benchmarks = create_benchmarks_from_config('configuration.yml')
-    for bm in benchmarks:
-        bm.run()
+    runner = BenchmarkRunner(benchmarks)
+    runner.run()
+    runner.collect_results()

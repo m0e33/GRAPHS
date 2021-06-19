@@ -4,6 +4,12 @@ import time
 import logging
 
 
+@dataclass
+class Result:
+    total_time: float = 0
+    some_other_random_number: float = 0
+
+
 class Benchmark(ABC):
 
     @dataclass
@@ -24,6 +30,8 @@ class Benchmark(ABC):
     def __init__(self, config: Configuration):
         self._config = config
         self._logger = logging.getLogger(self._config.name)
+
+        self.result = Result(1, 2)
 
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
 
@@ -49,9 +57,11 @@ class Benchmark(ABC):
         start = time.process_time()
         result = function(*args, **kwargs)
         end = time.process_time()
-        self._logger.info(f"{end-start} seconds for algorithm")
+        total = end - start
+        self.result.total_time = total
+        self.result.some_other_random_number = 0
+        self._logger.info(f"{total} seconds for algorithm")
         return result
-
 
     def __repr__(self):
         return str(self._config)
