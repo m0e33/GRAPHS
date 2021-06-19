@@ -10,12 +10,22 @@ class SnapBenchmark(Benchmark):
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
         self._graph = LoadEdgeList(TUNGraph, self._config.dataset_path, 0, 1)
+        nodes, edges = self._graph.GetNodes(), self._graph.GetEdges()
+        self._logger.info(self._logger_prefix + f"Loaded Graph with {nodes} nodes and {edges} edges")
 
     def _run_algorithm(self):
         self._logger.info(self._logger_prefix + f"Trying to run {self._config.algorithm}")
+
         if(self._config.algorithm == "CNM"):
-            modularity, CmtyV = self._graph.CommunityCNM()
+            # modularity, CmtyV = self._graph.CommunityCNM()
+            result = self._measure_time_and_get_results(self._graph.CommunityCNM)
+            modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
+
+        elif(self._config.algorithm == "CommunityGirvanNewman"):
+            modularity, CmtyV = self._graph.CommunityGirvanNewman()
+            self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
+
         else:
             raise AlgorithmNotFound(self._config.lib)
 

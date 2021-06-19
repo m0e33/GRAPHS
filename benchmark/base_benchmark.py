@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
+import time
 import logging
 
 
@@ -28,6 +29,7 @@ class Benchmark(ABC):
 
     def run(self) -> None:
         self._get_graph()
+
         self._run_algorithm()
         # self._collect_results()
 
@@ -42,6 +44,13 @@ class Benchmark(ABC):
     # @abstractmethod
     # def _collect_results(self):
     #     pass
+
+    def _measure_time_and_get_results(self, function):
+        start = time.process_time()
+        result = function()
+        end = time.process_time()
+        self._logger.info(f"{end-start} seconds for algorithm")
+        return result
 
 
     def __repr__(self):

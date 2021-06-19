@@ -3,12 +3,12 @@ Benchmark1:
   dataset_path: "storage/0.05-com-dblp.ungraph.txt"
   algorithm: "CNM"
 
-Benchmark2:
-  lib: "networkx"
-  dataset_path: "another_sample_path/path"
-  algorithm: "SBM"
-
-Benchmark3:
-  lib: "graphtool"
-  dataset_path: "another_data_set_path/path"
-  algorithm: "fancy"
+#Benchmark2:
+#  lib: "networkx"
+#  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
+#  algorithm: "k_clique_communities"
+#
+#Benchmark3:
+#  lib: "graphtool"
+#  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
+#  algorithm: "mcmc_anneal"
