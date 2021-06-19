@@ -45,9 +45,9 @@ class Benchmark(ABC):
     # def _collect_results(self):
     #     pass
 
-    def _measure_time_and_get_results(self, function):
+    def _measure_time_and_get_results(self, function, *args, **kwargs):
         start = time.process_time()
-        result = function()
+        result = function(*args, **kwargs)
         end = time.process_time()
         self._logger.info(f"{end-start} seconds for algorithm")
         return result

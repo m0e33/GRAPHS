@@ -17,13 +17,13 @@ class SnapBenchmark(Benchmark):
         self._logger.info(self._logger_prefix + f"Trying to run {self._config.algorithm}")
 
         if(self._config.algorithm == "CNM"):
-            # modularity, CmtyV = self._graph.CommunityCNM()
             result = self._measure_time_and_get_results(self._graph.CommunityCNM)
             modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
 
         elif(self._config.algorithm == "CommunityGirvanNewman"):
-            modularity, CmtyV = self._graph.CommunityGirvanNewman()
+            result = self._measure_time_and_get_results(self._graph.CommunityGirvanNewman)
+            modularity, CmtyV = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
 
         else:

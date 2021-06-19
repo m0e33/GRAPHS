@@ -23,7 +23,7 @@ class GraphToolBenchmark(Benchmark):
         self._logger.info(self._logger_prefix + f"Trying to run {self._config.algorithm}")
 
         if (self._config.algorithm == "minimze_blockmodel"):
-            communities = gt.minimize_blockmodel_dl(self._graph)
+            communities = self._measure_time_and_get_results(gt.minimize_blockmodel_dl, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         if (self._config.algorithm == "multiflip_mcmc_sweep"):
@@ -34,7 +34,7 @@ class GraphToolBenchmark(Benchmark):
 
         if (self._config.algorithm == "mcmc_anneal"):
             state = gt.BlockState(self._graph)
-            gt.mcmc_anneal(state, beta_range=(1, 10), niter=1000, mcmc_equilibrate_args=dict(force_niter=10))
+            self._measure_time_and_get_results(gt.mcmc_anneal, state, beta_range=(1, 10), niter=1000, mcmc_equilibrate_args=dict(force_niter=10))
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         else:
