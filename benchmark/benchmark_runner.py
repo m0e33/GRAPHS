@@ -1,6 +1,6 @@
 from dataclasses import asdict
-
 from data.csv_writer import write_csv
+
 
 class BenchmarkRunner:
     def __init__(self, benchmarks):

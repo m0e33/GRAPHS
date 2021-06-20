@@ -2,10 +2,13 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
 import logging
+from memory_profiler import profile
 
+STREAM = open('memory_profiler.log','w')
 
 @dataclass
 class Result:
+    name: str
     total_time: float = 0
     some_other_random_number: float = 0
 
@@ -31,15 +34,13 @@ class Benchmark(ABC):
         self._config = config
         self._logger = logging.getLogger(self._config.name)
 
-        self.result = Result(1, 2)
+        self.result = Result(self._config.name)
 
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
 
     def run(self) -> None:
         self._get_graph()
-
         self._run_algorithm()
-        # self._collect_results()
 
     @abstractmethod
     def _get_graph(self):
@@ -49,10 +50,7 @@ class Benchmark(ABC):
     def _run_algorithm(self):
         pass
 
-    # @abstractmethod
-    # def _collect_results(self):
-    #     pass
-
+    @profile(stream=STREAM)
     def _measure_time_and_get_results(self, function, *args, **kwargs):
         start = time.process_time()
         result = function(*args, **kwargs)
