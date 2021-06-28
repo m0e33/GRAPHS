@@ -1,3 +1,5 @@
+from cdlib import NodeClustering
+
 from evaluation.base_evaluator import BaseEvaluator
 
 
@@ -6,23 +8,29 @@ class SnapEvaluator(BaseEvaluator):
         super(SnapEvaluator, self).__init__(graph, communities, gt_path)
 
     def _evaluate(self):
-        purity = self.purity()
-        self._logger.info(self._logger_prefix + f"Purity: {purity}")
+        # purity = self.purity()
+        # rand_index = self.rand_index()
+        f1 = self.f1()
+        nmi = self.nmi()
+        # self._logger.info(self._logger_prefix + f"Purity: {purity}")
+        # self._logger.info(self._logger_prefix + f"Rand index: {rand_index}")
+        self._logger.info(self._logger_prefix + f"f1-score: {f1}")
+        self._logger.info(self._logger_prefix + f"normalized information: {nmi}")
 
     def purity(self):
         self._logger.info(self._logger_prefix + "Computing purity")
         sum_intersect = 0
         for ac_cmty in self._cmty_sets:
             max_intersect = 0
-            for gt_cmty in self._gt_cmtys:
+            for gt_cmty in self._gt_cmty_nc:
                max_intersect = max(len(ac_cmty.intersection(gt_cmty)), max_intersect)
             sum_intersect += max_intersect
         return sum_intersect / self._get_number_of_nodes()
 
 
-    def _convert_cmtys_to_sets(self):
+    def _convert_cmtys_to_node_clusterings(self):
         self._logger.info(self._logger_prefix + "Converting Snap Communities to actual python sets")
-        self._cmty_sets = [set(cmty) for cmty in self._communities]
+        self._cmty_sets = NodeClustering([set(cmty) for cmty in self._communities], graph=self._orig_graph)
 
     def _get_number_of_nodes(self):
         return self._graph.GetNodes()

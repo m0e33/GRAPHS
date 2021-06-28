@@ -8,7 +8,7 @@ class BenchmarkRunner:
 
     def run(self):
         for benchmark in self._benchmarks:
-            benchmark.run()
+             benchmark.run()
 
     def evaluate(self):
         for benchmark in self._benchmarks:

@@ -1,17 +1,17 @@
 #Benchmark1:
 #  lib: "snap"
 #  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
-#  algorithm: "CNM"
+#  algorithm: "CommunityGirvanNewman"
 #  gt_path: "storage/com-dblp.all.cmty.txt"
 
-#Benchmark2:
-#  lib: "networkx"
-#  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
-#  algorithm: "girvan_newman"
-#  gt_path: "storage/com-dblp.all.cmty.txt"
+Benchmark2:
+  lib: "networkx"
+  dataset_path: "storage/sub-com-dblp.ungraph.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/sub-com-dblp.all.cmty.txt"
 
-Benchmark3:
-  lib: "graphtool"
-  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
-  algorithm: "minimze_blockmodel"
-  gt_path: "storage/com-dblp.all.cmty.txt"
+#Benchmark3:
+#  lib: "graphtool"
+#  dataset_path: "storage/sub-com-dblp.ungraph.txt"
+#  algorithm: "minimze_blockmodel"
+#  gt_path: "storage/sub-com-dblp.all.cmty.txt"

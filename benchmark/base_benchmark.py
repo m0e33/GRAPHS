@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
 import logging
-from memory_profiler import profile
+# from memory_profiler import profile
 from evaluation.base_evaluator import BaseEvaluator
 
 
@@ -62,7 +62,6 @@ class Benchmark(ABC):
         end = time.process_time()
         total = end - start
         self.result.total_time = total
-        self.result.some_other_random_number = 0
         self._logger.info(f"{total} seconds for algorithm")
         return result
 
