@@ -1,6 +1,7 @@
 from benchmark.base_benchmark import Benchmark
 from snap.snap import *
 from benchmark.base_benchmark import AlgorithmNotFound
+from evaluation.snap_evaluator import SnapEvaluator
 
 
 class SnapBenchmark(Benchmark):
@@ -23,9 +24,12 @@ class SnapBenchmark(Benchmark):
 
         elif(self._config.algorithm == "CommunityGirvanNewman"):
             result = self._measure_time_and_get_results(self._graph.CommunityGirvanNewman)
-            modularity, CmtyV = result
+            modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
 
         else:
             raise AlgorithmNotFound(self._config.lib)
+
+        self.result.evaluator = SnapEvaluator(self._graph, com, self._config)
+
 

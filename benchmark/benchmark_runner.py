@@ -10,5 +10,9 @@ class BenchmarkRunner:
         for benchmark in self._benchmarks:
             benchmark.run()
 
+    def evaluate(self):
+        for benchmark in self._benchmarks:
+            benchmark.result.evaluator.evaluate()
+
     def collect_results(self):
         write_csv("test.csv", [asdict(benchmark.result) for benchmark in self._benchmarks], list(asdict(self._benchmarks[0].result).keys()))

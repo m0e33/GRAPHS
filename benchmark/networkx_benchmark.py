@@ -2,6 +2,7 @@ from benchmark.base_benchmark import Benchmark
 from networkx.readwrite.edgelist import read_edgelist
 from networkx.algorithms import community
 from benchmark.base_benchmark import AlgorithmNotFound
+from evaluation.networkx_evaluator import NetworkxEvaluator
 
 
 class NetworkxBenchmark(Benchmark):
@@ -21,36 +22,42 @@ class NetworkxBenchmark(Benchmark):
         self._logger.info(self._logger_prefix + f"Trying to run {self._config.algorithm}")
 
         if (self._config.algorithm == "girvan_newman"):
-            communities = self._measure_time_and_get_results(community.girvan_newman, self._graph)
+            self._communities = self._measure_time_and_get_results(community.girvan_newman, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "async_fluid"):
-            communities = self._measure_time_and_get_results(community.asyn_fluidc, self._graph, self._k)
+            self._communities = self._measure_time_and_get_results(community.asyn_fluidc, self._graph, self._k)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "asyn_lpa_communities"):
-            communities = self._measure_time_and_get_results(community.asyn_lpa_communities, self._graph)
+            self._communities = self._measure_time_and_get_results(community.asyn_lpa_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "asyn_lpa_communities"):
-            communities = self._measure_time_and_get_results(community.asyn_lpa_communities, self._graph)
+            self._communities = self._measure_time_and_get_results(community.asyn_lpa_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "label_propagation_communities"):
-            communities = self._measure_time_and_get_results(community.label_propagation_communities, self._graph)
+            self._communities = self._measure_time_and_get_results(community.label_propagation_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "lukes_partitioning"):
-            communities = self._measure_time_and_get_results(community.lukes_partitioning, self._graph, self._max_weight)
+            self._communities = self._measure_time_and_get_results(community.lukes_partitioning, self._graph, self._max_weight)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "greedy_modularity_communities"):
-            communities = self._measure_time_and_get_results(community.greedy_modularity_communities, self._graph, self._max_weight)
+            self._communities = self._measure_time_and_get_results(community.greedy_modularity_communities, self._graph, self._max_weight)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "k_clique_communities"):
-            communities = self._measure_time_and_get_results(community.k_clique_communities, self._graph, self._k)
+            self._communities = self._measure_time_and_get_results(community.k_clique_communities, self._graph, self._k)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         else:
             raise AlgorithmNotFound(self._config.lib)
+
+        self.result.evaluator = NetworkxEvaluator(self._graph, self._communities, self._config)
+
+
+    def _evaluate_result(self):
+        print("pass")

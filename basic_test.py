@@ -9,7 +9,7 @@ from benchmark.benchmark_runner import BenchmarkRunner
 logging.basicConfig(level=logging.DEBUG)
 
 if __name__ == "__main__":
-    print("*************************************************\n"
+    logging.info("\n*************************************************\n"
          "*                                               *\n"
          "*             starting experiment               *\n"
          "*                                               *\n"
@@ -18,4 +18,5 @@ if __name__ == "__main__":
     benchmarks = create_benchmarks_from_config('configuration.yml')
     runner = BenchmarkRunner(benchmarks)
     runner.run()
+    runner.evaluate()
     runner.collect_results()
