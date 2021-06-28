@@ -1,11 +1,30 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 import logging
+import sys
 
 
 class ImportMode(Enum):
     CMTY_PER_LINE = "community_per_line"
     NODE_LABEL = "node_label"
+
+
+def precision(a, b):
+    return len(a.intersection(b)) / len(a)
+
+
+def recall(a, b):
+    return len(a.intersection(b)) / len(b)
+
+
+def f1_score(b, a):
+    return (2 * precision(b, a) * recall(b, a)) / (precision(b, a) + recall(b, a) + sys.float_info.epsilon)
+
+
+def f1_score_sets(b, A):
+    return max([f1_score(b, a) for a in A])
+
+
 
 class BaseEvaluator(ABC):
     def __init__(self, graph, communities, config):
@@ -22,7 +41,9 @@ class BaseEvaluator(ABC):
     def evaluate(self):
         self._logger.info(self._logger_prefix + "Evaluating Results")
         self._convert_cmtys_to_sets()
-        self._evaluate()
+        purity = self.purity()
+        avg_f1 = self.average_f1()
+        self._logger.info(self._logger_prefix + f"Purity: {purity}, Avg F1: {avg_f1}")
 
     def import_gt(self, mode = ImportMode.CMTY_PER_LINE):
         gt_sets = []
@@ -44,12 +65,12 @@ class BaseEvaluator(ABC):
             sum_intersect += max_intersect
         return sum_intersect / self._get_number_of_nodes()
 
-    @abstractmethod
-    def _convert_cmtys_to_sets(self):
-        pass
+    def average_f1(self):
+        self._logger.info(self._logger_prefix + "Computing Average f1 score")
+        return sum([f1_score_sets(b, self._gt_cmtys) for b in self._cmty_sets])/len(self._cmty_sets) + sum([f1_score_sets(a, self._cmty_sets) for a in self._gt_cmtys])/len(self._gt_cmtys)
 
     @abstractmethod
-    def _evaluate(self):
+    def _convert_cmtys_to_sets(self):
         pass
 
     @abstractmethod

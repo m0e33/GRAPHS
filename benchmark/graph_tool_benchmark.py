@@ -27,6 +27,12 @@ class GraphToolBenchmark(Benchmark):
             self._communities = self._measure_time_and_get_results(gt.minimize_blockmodel_dl, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
+        if (self._config.algorithm == "minimze_nested_blockmodel"):
+            state = self._measure_time_and_get_results(gt.minimize_nested_blockmodel_dl, self._graph)
+            last_level = state.get_levels()[0]
+            self._communities = last_level
+            self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+
         elif (self._config.algorithm == "multiflip_mcmc_sweep"):
             state = gt.BlockState(self._graph)
             for i in range(1):  # this should be sufficiently large

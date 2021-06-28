@@ -5,9 +5,6 @@ class SnapEvaluator(BaseEvaluator):
     def __init__(self, graph, communities, gt_path):
         super(SnapEvaluator, self).__init__(graph, communities, gt_path)
 
-    def _evaluate(self):
-        purity = self.purity()
-        self._logger.info(self._logger_prefix + f"Purity: {purity}")
 
     def purity(self):
         self._logger.info(self._logger_prefix + "Computing purity")
