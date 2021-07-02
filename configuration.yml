@@ -9,9 +9,11 @@ Benchmark2:
   dataset_path: "storage/sub-com-dblp.ungraph.txt"
   algorithm: "girvan_newman"
   gt_path: "storage/sub-com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
 
 #Benchmark3:
 #  lib: "graphtool"
 #  dataset_path: "storage/sub-com-dblp.ungraph.txt"
 #  algorithm: "minimze_blockmodel"
 #  gt_path: "storage/sub-com-dblp.all.cmty.txt"
+#  gt_is_overlapping: True

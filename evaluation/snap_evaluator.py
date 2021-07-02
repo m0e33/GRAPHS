@@ -7,15 +7,6 @@ class SnapEvaluator(BaseEvaluator):
     def __init__(self, graph, communities, gt_path):
         super(SnapEvaluator, self).__init__(graph, communities, gt_path)
 
-    def _evaluate(self):
-        # purity = self.purity()
-        # rand_index = self.rand_index()
-        f1 = self.f1()
-        nmi = self.nmi()
-        # self._logger.info(self._logger_prefix + f"Purity: {purity}")
-        # self._logger.info(self._logger_prefix + f"Rand index: {rand_index}")
-        self._logger.info(self._logger_prefix + f"f1-score: {f1}")
-        self._logger.info(self._logger_prefix + f"normalized information: {nmi}")
 
     def purity(self):
         self._logger.info(self._logger_prefix + "Computing purity")

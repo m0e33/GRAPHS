@@ -16,3 +16,5 @@ class BenchmarkRunner:
 
     def collect_results(self):
         write_csv("test.csv", [asdict(benchmark.result) for benchmark in self._benchmarks], list(asdict(self._benchmarks[0].result).keys()))
+        write_csv("test2.csv", [asdict(benchmark.result.evaluator.result) for benchmark in self._benchmarks],
+                  list(asdict(self._benchmarks[0].result.evaluator.result).keys()))

@@ -1,3 +1,4 @@
+"""Quality evaluation of benchmarks"""
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
@@ -9,15 +10,15 @@ from evaluation.base_evaluator import BaseEvaluator
 STREAM = open('memory_profiler.log','w')
 
 @dataclass
-class Result:
+class BenchmarkResult:
+    """Benchmark Results"""
     name: str
     evaluator = None
     total_time: float = 0
-    some_other_random_number: float = 0
 
 
 class Benchmark(ABC):
-
+    """Benchmarks"""
     @dataclass
     class Configuration:
 
@@ -36,10 +37,13 @@ class Benchmark(ABC):
         gt_path: str
         """Path to ground truth labels for communities"""
 
+        gt_is_overlapping: bool
+        """True if ground-truth communites are overlapping"""
+
     def __init__(self, config: Configuration):
         self._config = config
         self._logger = logging.getLogger(self._config.name)
-        self.result = Result(self._config.name)
+        self.result = BenchmarkResult(self._config.name)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
 
     def run(self) -> None:

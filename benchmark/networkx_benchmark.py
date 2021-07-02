@@ -4,6 +4,10 @@ from networkx.algorithms import community
 from benchmark.base_benchmark import AlgorithmNotFound
 from evaluation.networkx_evaluator import NetworkxEvaluator
 
+def girvan_newman(graph):
+    communities = community.girvan_newman(graph)
+    top_level_cmtys = next(communities)
+    return next(communities)
 
 class NetworkxBenchmark(Benchmark):
     def __init__(self, config: Benchmark.Configuration):
@@ -22,7 +26,7 @@ class NetworkxBenchmark(Benchmark):
         self._logger.info(self._logger_prefix + f"Trying to run {self._config.algorithm}")
 
         if (self._config.algorithm == "girvan_newman"):
-            self._communities = self._measure_time_and_get_results(community.girvan_newman, self._graph)
+            self._communities = self._measure_time_and_get_results(girvan_newman, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "async_fluid"):
@@ -57,7 +61,3 @@ class NetworkxBenchmark(Benchmark):
             raise AlgorithmNotFound(self._config.lib)
 
         self.result.evaluator = NetworkxEvaluator(self._graph, self._communities, self._config)
-
-
-    def _evaluate_result(self):
-        print("pass")
