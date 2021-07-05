@@ -5,18 +5,12 @@ import logging
 from dataclasses import dataclass
 from cdlib import NodeClustering
 import pyintergraph
-from cdlib.evaluation import adjusted_rand_index, f1, normalized_mutual_information
+from cdlib.evaluation import *
 
 
 class ImportMode(Enum):
   CMTY_PER_LINE = "community_per_line"
   NODE_LABEL = "node_label"
-
-@dataclass
-class EvaluatorResult:
-  rand_index: float
-  f1: float
-  nmi: float
 
 
 class BaseEvaluator(ABC):
@@ -39,11 +33,25 @@ class BaseEvaluator(ABC):
   def evaluate(self):
     self._logger.info(self._logger_prefix + "Evaluating Results")
     self._convert_cmtys_to_node_clusterings()
-    f1 = self.f1()
-    nmi = self.nmi() if not self._config.gt_is_overlapping else None
-    rand_index = self.rand_index() if not self._config.gt_is_overlapping else None
 
-    self.result = EvaluatorResult(f1=f1, nmi=nmi, rand_index=rand_index)
+    partition_methods = [getattr(self, function) for function in dir(self)
+                      if function.startswith("partition_") and callable(getattr(self, function))]
+
+    fitness_methods = [getattr(self, function) for function in dir(self)
+                      if function.startswith("fitness_") and callable(getattr(self, function))]
+
+    def try_method(method):
+      self._logger.info(self._logger_prefix + f"Trying to run {method.__name__}")
+      try:
+        return method().score
+      except Exception as e:
+        self._logger.info(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}")
+        return None
+
+    self.fitness_results = {fitness_method.__name__ : try_method(fitness_method) for fitness_method in fitness_methods}
+    self.partition_results = {partition_method.__name__: try_method(partition_method) for partition_method in partition_methods}
+
+
 
   def import_gt(self, mode=ImportMode.CMTY_PER_LINE):
     gt_lists = []
@@ -67,18 +75,105 @@ class BaseEvaluator(ABC):
   """
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   +                                                                         +
-  +                                  METRICS                                +
+  +                            METRICS PARTITION                            +
   +                                                                         +
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   """
 
-  def rand_index(self):
+  def partition_adjusted_rand_index(self):
     return adjusted_rand_index(self._gt_cmty_nc, self._ac_cmty_nc)
 
-  def f1(self):
+  def partition_f1(self):
     return f1(self._ac_cmty_nc, self._gt_cmty_nc)
 
-  def nmi(self):
+  def partition_normalized_mutual_information(self):
     return normalized_mutual_information(self._ac_cmty_nc, self._gt_cmty_nc)
 
+  def partition_nf1(self):
+    return nf1(self._ac_cmty_nc, self._gt_cmty_nc)
 
+  def partition_adjustet_normalized_mutual_information(self):
+    return adjusted_mutual_information(self._ac_cmty_nc, self._gt_cmty_nc)
+
+  def partition_omega(self):
+    return omega(self._ac_cmty_nc, self._gt_cmty_nc)
+
+  def partition_overlapping_normalized_mutual_information_LFK(self):
+    return overlapping_normalized_mutual_information_LFK(self._ac_cmty_nc, self._gt_cmty_nc)
+
+  def partition_overlapping_normalized_mutual_information_MGH(self):
+    return overlapping_normalized_mutual_information_MGH(self._ac_cmty_nc, self._gt_cmty_nc)
+
+  def partition_variation_of_information(self):
+    return variation_of_information(self._ac_cmty_nc, self._gt_cmty_nc)
+
+  """
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  +                                                                         +
+  +                                FITNESS                                  +
+  +                                                                         +
+  +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  """
+
+  def fitness_avg_distance(self):
+    return avg_distance(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_avg_embeddedness(self):
+    return avg_embeddedness(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_average_internal_degree(self):
+      return average_internal_degree(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_avg_transitivity(self):
+    return avg_transitivity(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_conductance(self):
+    return conductance(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_cut_ratio(self):
+    return cut_ratio(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_edges_inside(self):
+    return edges_inside(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_expansion(self):
+    return expansion(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_fraction_over_median_degree(self):
+    return fraction_over_median_degree(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_hub_dominance(self):
+    return hub_dominance(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_internale_edge_density(self):
+    return internal_edge_density(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_normalized_cut(self):
+    return normalized_cut(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_max_odf(self):
+    return max_odf(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_avg_odf(self):
+    return avg_odf(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_flake_odf(self):
+    return flake_odf(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_scale_density(self):
+    return scaled_density(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_significance(self):
+    return significance(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_size(self):
+    return size(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_surprise(self):
+    return surprise(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_triangle_participation_ratio(self):
+    return triangle_participation_ratio(self._orig_graph, self._ac_cmty_nc)
+
+  def fitness_purity(self):
+    return purity(self._ac_cmty_nc)

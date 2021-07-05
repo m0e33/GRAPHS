@@ -15,6 +15,8 @@ class BenchmarkRunner:
             benchmark.result.evaluator.evaluate()
 
     def collect_results(self):
-        write_csv("test.csv", [asdict(benchmark.result) for benchmark in self._benchmarks], list(asdict(self._benchmarks[0].result).keys()))
-        write_csv("test2.csv", [asdict(benchmark.result.evaluator.result) for benchmark in self._benchmarks],
-                  list(asdict(self._benchmarks[0].result.evaluator.result).keys()))
+        write_csv("time.csv", [asdict(benchmark.result) for benchmark in self._benchmarks], list(asdict(self._benchmarks[0].result).keys()))
+        write_csv("fitness.csv", [benchmark.result.evaluator.fitness_results for benchmark in self._benchmarks],
+                  list(self._benchmarks[0].result.evaluator.fitness_results.keys()))
+        write_csv("partition.csv", [benchmark.result.evaluator.partition_results for benchmark in self._benchmarks],
+                  list(self._benchmarks[0].result.evaluator.partition_results.keys()))
