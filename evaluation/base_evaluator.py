@@ -48,8 +48,8 @@ class BaseEvaluator(ABC):
         self._logger.info(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}")
         return None
 
-    self.fitness_results = {fitness_method.__name__ : try_method(fitness_method) for fitness_method in fitness_methods}
-    self.partition_results = {partition_method.__name__: try_method(partition_method) for partition_method in partition_methods}
+    self.fitness_results = {f"{self._logger_prefix}-{fitness_method.__name__}" : try_method(fitness_method) for fitness_method in fitness_methods}
+    self.partition_results = {f"{self._logger_prefix}--{partition_method.__name__}": try_method(partition_method) for partition_method in partition_methods}
 
 
 
