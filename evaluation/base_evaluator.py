@@ -2,9 +2,7 @@ from abc import ABC, abstractmethod
 from enum import Enum
 from networkx.readwrite.edgelist import read_edgelist
 import logging
-from dataclasses import dataclass
 from cdlib import NodeClustering
-import pyintergraph
 from cdlib.evaluation import *
 
 

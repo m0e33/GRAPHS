@@ -1,0 +1,41 @@
+GraphtoolMultiflipMCMCSweepEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+GraphtoolMCMCAnnealEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+GraphtoolMultiflipMCMCSweepWikiTopCats:
+  lib: "graphtool"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+GraphtoolMCMCAnnealWikiTopCats:
+  lib: "graphtool"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+GraphtoolMultiflipMCMCSweepFriendster:
+  lib: "graphtool"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
+
+GraphtoolMCMCAnnealFriendster:
+  lib: "graphtool"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True

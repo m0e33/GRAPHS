@@ -15,7 +15,7 @@ if __name__ == "__main__":
          "*                                               *\n"
          "*************************************************\n")
 
-    benchmarks = create_benchmarks_from_config('configuration.yml')
+    benchmarks = create_benchmarks_from_config('configuration-email-core.yml')
     runner = BenchmarkRunner(benchmarks)
     runner.run()
     runner.evaluate()

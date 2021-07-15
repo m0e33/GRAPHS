@@ -18,11 +18,9 @@ def read_csv_to_json_array(path: str, fieldnames: List[str]):
     return json_array
 
 
-def write_csv(path: str, data, fieldnames: List[str]):
+def write_results(path: str, data, fieldnames: List[str]):
     """Helper method for writing a List of Dicts to csv"""
 
-    with open(path, "w", newline="") as csvfile:
-        writer = csv.DictWriter(csvfile, delimiter=";", fieldnames=fieldnames)
-        writer.writeheader()
-        for entry in data:
-            writer.writerow(dict((k, entry[k]) for k in fieldnames))
+    with open(path, "a", newline="") as file:
+        for entry, value in data.items():
+            file.write(f"{entry}  {value}\n")

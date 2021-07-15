@@ -1,19 +1,170 @@
-#Benchmark1:
-#  lib: "snap"
-#  dataset_path: "storage/0.05-com-dblp.ungraph.txt"
-#  algorithm: "CommunityGirvanNewman"
-#  gt_path: "storage/com-dblp.all.cmty.txt"
-
-Benchmark2:
+# Benchmark configurations
+## E-Mail Core (directed, not overlapping)
+### NetworkX
+NetworkXCommunityGirvanNewmanEmailCore:
   lib: "networkx"
-  dataset_path: "storage/sub-com-dblp.ungraph.txt"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
   algorithm: "girvan_newman"
-  gt_path: "storage/sub-com-dblp.all.cmty.txt"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+NetworkXAsyncLPAcommunitiesEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+NetworkXLabelPropagationsEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+### Graphtools
+GraphtoolMinimizeBlockmodelEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+### SNAP
+SnapCommunityGirvanNewmanEmailCore:
+  lib: "snap"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "CommunityGirvanNewman"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: True
 
-#Benchmark3:
-#  lib: "graphtool"
-#  dataset_path: "storage/sub-com-dblp.ungraph.txt"
-#  algorithm: "minimze_blockmodel"
-#  gt_path: "storage/sub-com-dblp.all.cmty.txt"
-#  gt_is_overlapping: True
+SnapCNMEmailCore:
+  lib: "snap"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "CNM"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: True
+
+
+## DBLP (undirected, overlapping)
+### NetworkX
+NetworkXGirvanNewmanDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXAsyncLPAcommunitiesDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXLabelPropagationDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+### Graphtools
+GraphtoolMinimizeBlockmodelDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+GraphtoolMultiflipMCMCSweepDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+GraphtoolMCMCAnnealDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+## Wiki Topcats (directed, overlapping)
+### NetworkX
+NetworkXCommunityGirvanNewmanWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+NetworkXAsyncLPAcommunitiesWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+NetworkXLabelPropagationsWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+### Graphtools
+GraphtoolMinimizeBlockmodelWikiTopCats:
+  lib: "graphtool"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+## Friendster (undirected, overlapping)
+### NetworkX
+NetworkXCommunityGirvanNewmanFriendster:
+  lib: "networkx"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXAsyncLPAcommunitiesFriendster:
+  lib: "networkx"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXLabelPropagationsFriendster:
+  lib: "networkx"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
+
+### Graphtools
+GraphtoolMinimizeBlockmodelFriendster:
+  lib: "graphtool"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
+
+## DBLP (undirected, overlapping)
+### SNAP
+SnapCommunityGirvanNewmanDBLP:
+  lib: "snap"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "CommunityGirvanNewman"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+SnapCNMDBLP:
+  lib: "snap"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
