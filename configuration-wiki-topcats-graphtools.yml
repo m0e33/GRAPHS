@@ -1,0 +1,9 @@
+
+
+### Graphtools
+GraphtoolMinimizeBlockmodelWikiTopCats:
+  lib: "graphtool"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True

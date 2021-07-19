@@ -1,0 +1,22 @@
+## Wiki Topcats (directed, overlapping)
+### NetworkX
+NetworkXCommunityGirvanNewmanWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+NetworkXAsyncLPAcommunitiesWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+NetworkXLabelPropagationsWikiTopCats:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True

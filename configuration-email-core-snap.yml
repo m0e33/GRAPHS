@@ -1,0 +1,7 @@
+### SNAP
+SnapCommunityGirvanNewmanEmailCore:
+  lib: "snap"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "CommunityGirvanNewman"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: True

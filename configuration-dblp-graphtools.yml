@@ -1,0 +1,22 @@
+## DBLP (undirected, overlapping)
+### Graphtools
+GraphtoolMinimizeBlockmodelDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+GraphtoolMultiflipMCMCSweepDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+GraphtoolMCMCAnnealDBLP:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True

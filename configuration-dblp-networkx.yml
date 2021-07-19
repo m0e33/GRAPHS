@@ -1,0 +1,22 @@
+## DBLP (undirected, overlapping)
+### NetworkX
+NetworkXGirvanNewmanDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "girvan_newman"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXAsyncLPAcommunitiesDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "asyn_lpa_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+NetworkXLabelPropagationDBLP:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True

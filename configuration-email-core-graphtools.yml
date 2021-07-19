@@ -1,0 +1,10 @@
+# Benchmark configurations
+## E-Mail Core (directed, not overlapping)
+### Graphtools
+GraphtoolMinimizeBlockmodelEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
