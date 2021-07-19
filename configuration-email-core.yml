@@ -1,45 +1,6 @@
-## E-Mail Core (directed, not overlapping)
-### NetworkX
-NetworkXCommunityGirvanNewmanEmailCore:
-  lib: "networkx"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "girvan_newman"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: False
-
 NetworkXAsyncLPAcommunitiesEmailCore:
   lib: "networkx"
   dataset_path: "storage/email-Eu-core-undirected.txt"
   algorithm: "asyn_lpa_communities"
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: False
-
-NetworkXLabelPropagationsEmailCore:
-  lib: "networkx"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "label_propagation_communities"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: False
-
-### Graphtools
-GraphtoolMinimizeBlockmodelEmailCore:
-  lib: "graphtool"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "minimze_blockmodel"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: False
-
-### SNAP
-SnapCommunityGirvanNewmanEmailCore:
-  lib: "snap"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "CommunityGirvanNewman"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: True
-
-SnapCNMEmailCore:
-  lib: "snap"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "CNM"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: True

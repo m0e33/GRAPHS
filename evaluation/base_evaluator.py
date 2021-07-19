@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 from networkx.readwrite.edgelist import read_edgelist
+from networkx.relabel import convert_node_labels_to_integers
 import logging
 from cdlib import NodeClustering
 from cdlib.evaluation import *
@@ -22,7 +23,7 @@ class BaseEvaluator(ABC):
 
     # node clustering needs the base graph in a networkx or graph-tools format.
     # We go with graph tool here.
-    self._orig_graph = read_edgelist(self._config.dataset_path)
+    self._orig_graph = convert_node_labels_to_integers(read_edgelist(self._config.dataset_path))
     self.import_gt()
 
     self._logger = logging.getLogger(type(self).__name__)
