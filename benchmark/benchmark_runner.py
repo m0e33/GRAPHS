@@ -19,17 +19,17 @@ class BenchmarkRunner:
     def collect_results(self):
         for benchmark in self._benchmarks:
             write_results(
-                f"time_{self.current_timestamp}.txt",
+                f"time_{self.current_timestamp}_{benchmark.result.name}.txt",
                 asdict(benchmark.result),
                 list(asdict(benchmark.result).keys()),
             )
             write_results(
-                f"fitness_{self.current_timestamp}.txt",
+                f"fitness_{self.current_timestamp}_{benchmark.result.name}.txt",
                 benchmark.result.evaluator.fitness_results,
                 list(benchmark.result.evaluator.fitness_results.keys()),
             )
             write_results(
-                f"partition_{self.current_timestamp}.txt",
+                f"partition_{self.current_timestamp}_{benchmark.result.name}.txt",
                 benchmark.result.evaluator.partition_results,
                 list(benchmark.result.evaluator.partition_results.keys()),
             )

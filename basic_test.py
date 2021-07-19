@@ -12,8 +12,8 @@ if __name__ == "__main__":
                "*************************************************\n")
 
   configuration_files = [
-    'configuration-email-core-networkx.yml',
     'configuration-email-core-graphtools.yml',
+    'configuration-email-core-networkx.yml',
     'configuration-email-core-snap.yml',
     'configuration-dbpl-networkx.yml',
     'configuration-dbpl-graphtools.yml',
@@ -31,16 +31,16 @@ if __name__ == "__main__":
     try:
       runner.run()
     except Exception as e:
-      logging.error("Failed to RUN '" + configuration + "': " + e)
+      logging.error("Failed to RUN '" + configuration + "': " + str(e))
 
     try:
       runner.evaluate()
     except Exception as e:
-      logging.error("Failed to EVALUATE '" + configuration + "': " + e)
+      logging.error("Failed to EVALUATE '" + configuration + "': " + str(e))
 
     try:
       runner.collect_results()
     except Exception as e:
-      logging.error("Failed to COLLECT_RESULTS for '" + configuration + "': " + e)
+      logging.error("Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e))
     logging.info("Finished to run '" + configuration + "'\n")
 
