@@ -7,7 +7,7 @@ from networkx.readwrite import read_edgelist
 
 class GraphToolEvaluator(BaseEvaluator):
     def __init__(self, graph, communities, config):
-        self._orig_graph = convert_node_labels_to_integers(read_edgelist(self._config.dataset_path))
+        self._orig_graph = convert_node_labels_to_integers(read_edgelist(config.dataset_path))
         super(GraphToolEvaluator, self).__init__(graph, communities, config)
 
 
