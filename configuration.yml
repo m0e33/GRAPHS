@@ -38,14 +38,6 @@ SnapCommunityGirvanNewmanEmailCore:
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: True
 
-SnapCNMEmailCore:
-  lib: "snap"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "CNM"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: True
-
-
 ## DBLP (undirected, overlapping)
 ### NetworkX
 NetworkXGirvanNewmanDBLP:
