@@ -12,16 +12,8 @@ if __name__ == "__main__":
                "*************************************************\n")
 
   configuration_files = [
-    'configuration-email-core-graphtools.yml',
-    'configuration-email-core-networkx.yml',
-    'configuration-email-core-snap.yml',
-    'configuration-dbpl-networkx.yml',
-    'configuration-dbpl-graphtools.yml',
-    'configuration-dbpl-snap.yml',
-    'configuration-wiki-topcats-networkx.yml',
-    'configuration-wiki-topcats-graphtools.yml',
-    'configuration-friendster-networkx.yml',
-    'configuration-friendster-graphtools.yml',
+    'configuration-dblp-networkx.yml',
+    'configuration-dblp-graphtools.yml',
   ]
 
   for configuration in configuration_files:
