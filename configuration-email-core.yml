@@ -1,6 +1,6 @@
-NetworkXAsyncLPAcommunitiesEmailCore:
-  lib: "networkx"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "asyn_lpa_communities"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
+SnapTest:
+  lib: "snap"
+  dataset_path: "storage/sub-com-dblp.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/sub-com-dblp.all.cmty.txt"
   gt_is_overlapping: False

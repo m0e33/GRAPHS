@@ -2,10 +2,14 @@ from cdlib import NodeClustering
 
 from evaluation.base_evaluator import BaseEvaluator
 
+from networkx.relabel import convert_node_labels_to_integers
+from networkx.readwrite import read_edgelist
 
 class GraphToolEvaluator(BaseEvaluator):
-    def __init__(self, graph, communities, gt_path):
-        super(GraphToolEvaluator, self).__init__(graph, communities, gt_path)
+    def __init__(self, graph, communities, config):
+        self._orig_graph = convert_node_labels_to_integers(read_edgelist(self._config.dataset_path))
+        super(GraphToolEvaluator, self).__init__(graph, communities, config)
+
 
 
     def set_block_state(self, state):

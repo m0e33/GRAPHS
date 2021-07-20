@@ -2,11 +2,14 @@ from cdlib import NodeClustering
 
 from evaluation.base_evaluator import BaseEvaluator
 from tqdm import tqdm
+from networkx.relabel import convert_node_labels_to_integers
+from networkx.readwrite import read_edgelist
 
 
 class NetworkxEvaluator(BaseEvaluator):
-    def __init__(self, graph, communities, gt_path):
-        super(NetworkxEvaluator, self).__init__(graph, communities, gt_path)
+    def __init__(self, graph, communities, config):
+        self._orig_graph = convert_node_labels_to_integers(read_edgelist(self._config.dataset_path))
+        super(NetworkxEvaluator, self).__init__(graph, communities, config)
 
     def _convert_cmtys_to_node_clusterings(self):
         self._logger.info(self._logger_prefix + "Converting Networkx Communities to sets")

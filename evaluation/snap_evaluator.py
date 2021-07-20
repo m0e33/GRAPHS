@@ -1,11 +1,14 @@
 from cdlib import NodeClustering
+from networkx.relabel import convert_node_labels_to_integers
+from networkx.readwrite import read_edgelist
 
 from evaluation.base_evaluator import BaseEvaluator
 
 
 class SnapEvaluator(BaseEvaluator):
-    def __init__(self, graph, communities, gt_path):
-        super(SnapEvaluator, self).__init__(graph, communities, gt_path)
+    def __init__(self, graph, communities, config):
+        self._orig_graph = convert_node_labels_to_integers(read_edgelist(config.dataset_path), first_label=1)
+        super(SnapEvaluator, self).__init__(graph, communities, config)
 
 
     def purity(self):
@@ -21,7 +24,7 @@ class SnapEvaluator(BaseEvaluator):
 
     def _convert_cmtys_to_node_clusterings(self):
         self._logger.info(self._logger_prefix + "Converting Snap Communities to actual python sets")
-        self._cmty_sets = NodeClustering([set(cmty) for cmty in self._communities], graph=self._orig_graph)
+        self._ac_cmty_nc = NodeClustering([list(cmty) for cmty in self._communities], graph=self._orig_graph)
 
     def _get_number_of_nodes(self):
         return self._graph.GetNodes()
