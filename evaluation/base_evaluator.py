@@ -21,9 +21,6 @@ class BaseEvaluator(ABC):
     self._ac_cmty_nc = None
     self.result = None
 
-    # node clustering needs the base graph in a networkx or graph-tools format.
-    # We go with graph tool here.
-    self._orig_graph = convert_node_labels_to_integers(read_edgelist(self._config.dataset_path))
     self.import_gt()
 
     self._logger = logging.getLogger(type(self).__name__)
