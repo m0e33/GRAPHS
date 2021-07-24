@@ -1,8 +1,8 @@
 Networkx_lukes_partitioning_email:
   lib: "networkx"
-  dataset_path: "storage/email-Eu-core.txt"
+  dataset_path: "storage/email-Eu-core-manual-undirected-0.txt"
   algorithm: "lukes_partitioning"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_path: "storage/email-Eu-core-department-labels-0.txt"
   gt_is_overlapping: False
 
 Networkx_lukes_partitioning_dblp:
