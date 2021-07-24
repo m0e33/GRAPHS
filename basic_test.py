@@ -20,20 +20,21 @@ if __name__ == "__main__":
   for configuration in configuration_files:
     logging.info("Starting to run '" + configuration + "'\n")
     benchmarks = create_benchmarks_from_config(configuration)
-    runner = BenchmarkRunner(benchmarks)
-    try:
-      runner.run()
-    except Exception as e:
-      logging.error("Failed to RUN '" + configuration + "': " + str(e))
+    for benchmark in benchmarks:
+      runner = BenchmarkRunner([benchmark])
+      try:
+        runner.run()
+      except Exception as e:
+        logging.error("Failed to RUN '" + configuration + "': " + str(e))
 
-    try:
-      runner.evaluate()
-    except Exception as e:
-      logging.error("Failed to EVALUATE '" + configuration + "': " + str(e))
+      try:
+        runner.evaluate()
+      except Exception as e:
+        logging.error("Failed to EVALUATE '" + configuration + "': " + str(e))
 
-    try:
-      runner.collect_results()
-    except Exception as e:
-      logging.error("Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e))
-    logging.info("Finished to run '" + configuration + "'\n")
+      try:
+        runner.collect_results()
+      except Exception as e:
+        logging.error("Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e))
+      logging.info("Finished to run '" + configuration + "'\n")
 
