@@ -1,0 +1,27 @@
+Networkx_lukes_partitioning_email:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+Networkx_lukes_partitioning_dblp:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+Networkx_lukes_partitioning_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+Networkx_lukes_partitioning_friendster:
+  lib: "networkx"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True

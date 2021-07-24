@@ -1,6 +1,7 @@
 from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
 from benchmark.benchmark_runner import BenchmarkRunner
+import sys
 
 logging.basicConfig(level=logging.DEBUG)
 
@@ -11,17 +12,9 @@ if __name__ == "__main__":
                "*                                               *\n"
                "*************************************************\n")
 
+  config = str(sys.argv[1])
   configuration_files = [
-    #'configuration-email-core-graphtools.yml',
-    #'configuration-email-core-networkx.yml',
-    'configuration-email-core-snap.yml',
-    #'configuration-dblp-networkx.yml',
-    #'configuration-dblp-graphtools.yml',
-    #'configuration-dblp-snap.yml',
-    #'configuration-wiki-topcats-networkx.yml',
-    #'configuration-wiki-topcats-graphtools.yml',
-    #'configuration-friendster-networkx.yml',
-    #'configuration-friendster-graphtools.yml',
+    config,
   ]
 
   for configuration in configuration_files:

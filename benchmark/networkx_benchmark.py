@@ -6,8 +6,7 @@ from evaluation.networkx_evaluator import NetworkxEvaluator
 
 def girvan_newman(graph):
     communities = community.girvan_newman(graph)
-    top_level_cmtys = next(communities)
-    return next(communities)
+    return next(communities) # measure just first iteration
 
 class NetworkxBenchmark(Benchmark):
     def __init__(self, config: Benchmark.Configuration):
@@ -50,7 +49,7 @@ class NetworkxBenchmark(Benchmark):
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "greedy_modularity_communities"):
-            self._communities = self._measure_time_and_get_results(community.greedy_modularity_communities, self._graph, self._max_weight)
+            self._communities = self._measure_time_and_get_results(community.greedy_modularity_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "k_clique_communities"):

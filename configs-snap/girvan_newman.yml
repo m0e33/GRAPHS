@@ -1,0 +1,13 @@
+Snap_girvan_newman_email:
+  lib: "snap"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "CommunityGirvanNewman"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+Snap_girvan_newman_dblp:
+  lib: "snap"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "CommunityGirvanNewman"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True

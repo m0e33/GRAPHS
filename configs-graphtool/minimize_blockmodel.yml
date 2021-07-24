@@ -1,0 +1,27 @@
+Graphtool_minimize_blockmodel_email:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+Graphtool_minimize_blockmodel_dblp:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+Graphtool_minimize_blockmodel_wiki:
+  lib: "graphtool"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+Graphtool_minimize_blockmodel_friendster:
+  lib: "graphtool"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
