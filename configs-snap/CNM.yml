@@ -1,0 +1,27 @@
+Snap_CNM_email:
+  lib: "snap"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "CNM"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+Snap_CNM_dblp:
+  lib: "snap"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+Snap_CNM_wiki:
+  lib: "snap"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "CNM"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+Snap_k_clique_communities_friendster:
+  lib: "snap"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True

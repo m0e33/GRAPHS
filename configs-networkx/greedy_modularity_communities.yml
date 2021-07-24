@@ -1,0 +1,27 @@
+Networkx_greedy_modularity_communities_email:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+Networkx_greedy_modularity_communities_dblp:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
+Networkx_greedy_modularity_communities_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
+
+Networkx_greedy_modularity_communities_friendster:
+  lib: "networkx"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
