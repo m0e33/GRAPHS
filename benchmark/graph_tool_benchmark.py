@@ -41,8 +41,8 @@ class GraphToolBenchmark(Benchmark):
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         elif (self._config.algorithm == "mcmc_anneal"):
-            state = gt.BlockState(self._graph)
-            self._communities = self._measure_time_and_get_results(gt.mcmc_anneal, state, beta_range=(1, 10), niter=10, mcmc_equilibrate_args=dict(force_niter=10))
+            state = gt.minimize_blockmodel_dl(self._graph)
+            self._communities = self._measure_time_and_get_results(mcmc_anneal, state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
 
         else:
