@@ -24,3 +24,9 @@ def write_results(path: str, data, fieldnames: List[str]):
     with open(path, "a", newline="") as file:
         for entry, value in data.items():
             file.write(f"{entry}  {value}\n")
+
+
+def append_line(path: str, cells: List[str]):
+    with open(path, 'a') as f:
+        writer = csv.writer(f)
+        writer.writerow(cells)
