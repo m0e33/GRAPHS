@@ -1,10 +1,3 @@
-Networkx_asyn_lpa_communities_email:
-  lib: "networkx"
-  dataset_path: "storage/email-Eu-core-manual-undirected-0.txt"
-  algorithm: "asyn_lpa_communities"
-  gt_path: "storage/email-Eu-core-department-labels-manual-undirected-0.txt"
-  gt_is_overlapping: False
-
 Networkx_asyn_lpa_communities_dblp:
   lib: "networkx"
   dataset_path: "storage/com-dblp.ungraph.txt"
