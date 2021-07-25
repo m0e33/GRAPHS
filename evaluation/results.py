@@ -8,16 +8,17 @@ from data.csv_writer import append_line
 logging.basicConfig(level=logging.DEBUG)
 
 configuration_files = [
-    'configuration-email-core-graphtools.yml',
-    'configuration-email-core-networkx.yml',
-    'configuration-email-core-snap.yml',
-    'configuration-dblp-networkx.yml',
-    'configuration-dblp-graphtools.yml',
-    'configuration-dblp-snap.yml',
-    'configuration-wiki-topcats-networkx.yml',
-    'configuration-wiki-topcats-graphtools.yml',
-    'configuration-friendster-networkx.yml',
-    'configuration-friendster-graphtools.yml',
+    'configs-graphtool/mcmc_anneal.yml',
+    'configs-graphtool/minimize_blockmodel.yml',
+    'configs-graphtool/multiflip_mcmc_sweep.yml',
+    'configs-networkx/asyn_lpa_communities.yml',
+    'configs-networkx/async_fluid.yml',
+    'configs-networkx/girvan_newman.yml',
+    'configs-networkx/greedy_modularity_communities.yml',
+    'configs-networkx/label_propagation_communities.yml',
+    'configs-networkx/lukes_partitioning.yml',
+    'configs-snap/CNM.yml',
+    'configs-snap/girvan_newman.yml',
 ]
 
 results_base_path = sys.argv[1]
@@ -52,8 +53,8 @@ def deconstruct_name(benchmark_name):
     bn_network = ''
     bn_library = ''
 
-    possible_librarys = ["NetworkX", "Graphtool", "Snap"]
-    possible_graphs = ["EmailCore"]
+    possible_librarys = ["Networkx", "Graphtool", "Snap"]
+    possible_graphs = ["email", "dblp", "wiki", "friendster"]
 
     for lib in possible_librarys:
         if lib in benchmark_name:
@@ -97,7 +98,7 @@ for configuration in configuration_files:
                 if len(glob.glob(corresponding_fitness_file)) != 0:
                     with open(glob.glob(corresponding_fitness_file)[0], "r") as f:
                         for fitness_metric_line in f:
-                            fitness_metric_value = fitness_metric_line.split(" ")[2]
+                            fitness_metric_value = fitness_metric_line.split(" ")[2][:-1]
                             benchmark_values_row.append(fitness_metric_value)
                 else:
                     [benchmark_values_row.append(0) for _ in range(fm_count)]
@@ -105,17 +106,9 @@ for configuration in configuration_files:
                 if len(glob.glob(corresponding_partition_file)) != 0:
                     with open(glob.glob(corresponding_partition_file)[0], "r") as f:
                         for partition_metric_line in f:
-                            partition_metric_value = partition_metric_line.split(" ")[2]
+                            partition_metric_value = partition_metric_line.split(" ")[2][:-1]
                             benchmark_values_row.append(partition_metric_value)
                 else:
                     [benchmark_values_row.append(0) for _ in range(pm_cunt)]
 
                 append_line(output_file_path, benchmark_values_row)
-    # load all time files with name in it
-    # extract libraryname, algorithm name and network name from name
-    # extract time from file
-    # print that line in a csv
-
-    # load all precision files with name in it
-    # extract metric values
-    # append values
