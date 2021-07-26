@@ -1,3 +1,10 @@
+Snap_CNM_email: # for evaluation purposes added back
+  lib: "snap"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
 Snap_CNM_dblp:
   lib: "snap"
   dataset_path: "storage/com-dblp.ungraph.txt"

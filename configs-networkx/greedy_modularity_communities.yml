@@ -1,3 +1,10 @@
+Networkx_greedy_modularity_communities_email: # for evaluation purposes added back
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
 Networkx_greedy_modularity_communities_dblp:
   lib: "networkx"
   dataset_path: "storage/com-dblp.ungraph.txt"

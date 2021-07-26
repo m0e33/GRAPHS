@@ -1,3 +1,10 @@
+Graphtool_minimize_blockmodel_mcmc_sweep_email: # for evaluation purposes added back
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
 Graphtool_minimize_blockmodel_mcmc_sweep_dblp:
   lib: "graphtool"
   dataset_path: "storage/com-dblp.ungraph.txt"

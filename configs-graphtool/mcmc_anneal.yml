@@ -1,3 +1,10 @@
+Graphtool_minimize_blockmodel_mcmc_aneal_email: # for evaluation purposes added back
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "mcmc_anneal"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
+
 Graphtool_minimize_blockmodel_mcmc_aneal_dblp:
   lib: "graphtool"
   dataset_path: "storage/com-dblp.ungraph.txt"
