@@ -11,10 +11,3 @@ Networkx_async_fluid_wiki:
   algorithm: "async_fluid"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True
-
-Networkx_async_fluid_friendster:
-  lib: "networkx"
-  dataset_path: "storage/com-friendster.ungraph.txt"
-  algorithm: "async_fluid"
-  gt_path: "storage/com-friendster.all.cmty.txt"
-  gt_is_overlapping: True

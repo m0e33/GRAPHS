@@ -11,10 +11,3 @@ Graphtool_minimize_blockmodel_mcmc_aneal_wiki:
   algorithm: "mcmc_anneal"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True
-
-Graphtool_minimize_blockmodel_mcmc_aneal_friendster:
-  lib: "graphtool"
-  dataset_path: "storage/com-friendster.ungraph.txt"
-  algorithm: "mcmc_anneal"
-  gt_path: "storage/com-friendster.all.cmty.txt"
-  gt_is_overlapping: True
