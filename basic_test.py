@@ -1,3 +1,5 @@
+import distutils.util
+
 from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
 from benchmark.benchmark_runner import BenchmarkRunner
@@ -19,8 +21,8 @@ if __name__ == "__main__":
         config,
     ]
 
-    execute_fitness = sys.argv[2] is True
-    execute_partition = sys.argv[3] is True
+    execute_fitness = bool(distutils.util.strtobool(sys.argv[2]))
+    execute_partition = bool(distutils.util.strtobool(sys.argv[3]))
 
     for configuration in configuration_files:
         logging.info("Starting to run '" + configuration + "'\n")
