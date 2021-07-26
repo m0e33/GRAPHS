@@ -11,10 +11,3 @@ Graphtool_minimize_blockmodel_mcmc_sweep_wiki:
   algorithm: "multiflip_mcmc_sweep"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True
-
-Graphtool_minimize_blockmodel_mcmc_sweep_friendster:
-  lib: "graphtool"
-  dataset_path: "storage/com-friendster.ungraph.txt"
-  algorithm: "multiflip_mcmc_sweep"
-  gt_path: "storage/com-friendster.all.cmty.txt"
-  gt_is_overlapping: True

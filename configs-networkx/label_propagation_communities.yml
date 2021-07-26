@@ -11,10 +11,3 @@ Networkx_label_propagation_communities_wiki:
   algorithm: "label_propagation_communities"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True
-
-Networkx_label_propagation_communities_friendster:
-  lib: "networkx"
-  dataset_path: "storage/com-friendster.ungraph.txt"
-  algorithm: "label_propagation_communities"
-  gt_path: "storage/com-friendster.all.cmty.txt"
-  gt_is_overlapping: True
