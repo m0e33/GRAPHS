@@ -1,25 +1,18 @@
-Graphtool_minimize_blockmodel_email:
-  lib: "graphtool"
-  dataset_path: "storage/email-Eu-core-manual-undirected-0.txt"
-  algorithm: "mcmc_anneal"
-  gt_path: "storage/email-Eu-core-department-labels-0.txt"
-  gt_is_overlapping: False
-
-Graphtool_minimize_blockmodel_dblp:
+Graphtool_minimize_blockmodel_mcmc_aneal_dblp:
   lib: "graphtool"
   dataset_path: "storage/com-dblp.ungraph.txt"
   algorithm: "mcmc_anneal"
   gt_path: "storage/com-dblp.all.cmty.txt"
   gt_is_overlapping: True
 
-Graphtool_minimize_blockmodel_wiki:
+Graphtool_minimize_blockmodel_mcmc_aneal_wiki:
   lib: "graphtool"
   dataset_path: "storage/wiki-topcats.txt"
   algorithm: "mcmc_anneal"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True
 
-Graphtool_minimize_blockmodel_friendster:
+Graphtool_minimize_blockmodel_mcmc_aneal_friendster:
   lib: "graphtool"
   dataset_path: "storage/com-friendster.ungraph.txt"
   algorithm: "mcmc_anneal"

@@ -12,9 +12,9 @@ class BenchmarkRunner:
         for benchmark in self._benchmarks:
             benchmark.run()
 
-    def evaluate(self):
+    def evaluate(self, execute_fitness: bool = True, execute_partition: bool = True):
         for benchmark in self._benchmarks:
-            benchmark.result.evaluator.evaluate()
+            benchmark.result.evaluator.evaluate(execute_partition, execute_fitness)
 
     def collect_results(self):
         for benchmark in self._benchmarks:
