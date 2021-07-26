@@ -1,0 +1,6 @@
+Networkx_async_fluid_dblp:
+  lib: "networkx"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "async_fluid"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True

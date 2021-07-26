@@ -1,0 +1,6 @@
+Networkx_async_fluid_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "async_fluid"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
