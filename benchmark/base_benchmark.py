@@ -15,6 +15,7 @@ class BenchmarkResult:
     name: str
     evaluator = None
     total_time: float = 0
+    process_time: float = 0
 
 
 class Benchmark(ABC):
@@ -61,12 +62,16 @@ class Benchmark(ABC):
 
     # @profile(stream=STREAM)
     def _measure_time_and_get_results(self, function, *args, **kwargs):
-        start = time.process_time()
+        start_process = time.process_time()
+        start_normal = time.time()
         result = function(*args, **kwargs)
-        end = time.process_time()
-        total = end - start
-        self.result.total_time = total
-        self._logger.info(f"{total} seconds for algorithm")
+        end_process = time.process_time()
+        end_normal = time.time()
+        total_process = end_process - start_process
+        total_normal = end_normal - start_normal
+        self.result.total_time = total_normal
+        self.result.process_time = total_process
+        self._logger.info(f"{total_normal} seconds for algorithm")
         return result
 
     def __repr__(self):
