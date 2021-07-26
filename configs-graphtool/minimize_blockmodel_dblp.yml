@@ -1,0 +1,6 @@
+Graphtool_minimize_blockmodel_dblp:
+  lib: "graphtool"
+  dataset_path: "storage/com-dblp.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_is_overlapping: True
