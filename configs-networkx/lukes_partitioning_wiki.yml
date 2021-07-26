@@ -1,0 +1,6 @@
+Networkx_lukes_partitioning_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True

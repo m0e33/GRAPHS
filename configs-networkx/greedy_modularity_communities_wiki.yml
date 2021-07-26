@@ -1,0 +1,6 @@
+Networkx_greedy_modularity_communities_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True

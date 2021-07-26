@@ -1,0 +1,6 @@
+Networkx_label_propagation_communities_wiki:
+  lib: "networkx"
+  dataset_path: "storage/wiki-topcats.txt"
+  algorithm: "label_propagation_communities"
+  gt_path: "storage/wiki-topcats-categories.txt"
+  gt_is_overlapping: True
