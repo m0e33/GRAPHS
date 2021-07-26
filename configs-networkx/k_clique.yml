@@ -1,3 +1,10 @@
+Networkx_k_clique_communities_email:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core.txt"
+  algorithm: "k_clique_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
 Networkx_k_clique_communities_dblp:
   lib: "networkx"
   dataset_path: "storage/com-dblp.ungraph.txt"

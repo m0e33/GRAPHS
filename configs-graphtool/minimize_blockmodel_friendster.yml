@@ -1,0 +1,6 @@
+Graphtool_minimize_blockmodel_friendster:
+  lib: "graphtool"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "minimze_blockmodel"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
