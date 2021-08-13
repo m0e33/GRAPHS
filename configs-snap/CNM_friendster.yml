@@ -1,0 +1,6 @@
+Snap_CNM_dblp:
+  lib: "snap"
+  dataset_path: "storage/com-friendster.ungraph.txt"
+  algorithm: "CNM"
+  gt_path: "storage/com-friendster.all.cmty.txt"
+  gt_is_overlapping: True
