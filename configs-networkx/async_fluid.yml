@@ -1,10 +1,3 @@
-Networkx_async_fluid_email: # for evaluation purposes added back
-  lib: "networkx"
-  dataset_path: "storage/com-dblp.ungraph.txt"
-  algorithm: "async_fluid"
-  gt_path: "storage/com-dblp.all.cmty.txt"
-  gt_is_overlapping: True
-
 Networkx_async_fluid_dblp:
   lib: "networkx"
   dataset_path: "storage/com-dblp.ungraph.txt"
@@ -12,9 +5,3 @@ Networkx_async_fluid_dblp:
   gt_path: "storage/com-dblp.all.cmty.txt"
   gt_is_overlapping: True
 
-Networkx_async_fluid_wiki:
-  lib: "networkx"
-  dataset_path: "storage/wiki-topcats.txt"
-  algorithm: "async_fluid"
-  gt_path: "storage/wiki-topcats-categories.txt"
-  gt_is_overlapping: True

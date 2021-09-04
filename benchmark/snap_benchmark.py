@@ -30,6 +30,8 @@ class SnapBenchmark(Benchmark):
         else:
             raise AlgorithmNotFound(self._config.lib)
 
+        # write com to file.
+
         self.result.evaluator = SnapEvaluator(self._graph, com, self._config)
 
 

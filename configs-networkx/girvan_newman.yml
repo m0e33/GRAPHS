@@ -4,10 +4,3 @@ Networkx_girvan_newman_email:
   algorithm: "girvan_newman"
   gt_path: "storage/email-Eu-core-department-labels-0.txt"
   gt_is_overlapping: False
-
-Networkx_girvan_newman_dblp:
-  lib: "networkx"
-  dataset_path: "storage/com-dblp.ungraph.txt"
-  algorithm: "girvan_newman"
-  gt_path: "storage/com-dblp.all.cmty.txt"
-  gt_is_overlapping: True
