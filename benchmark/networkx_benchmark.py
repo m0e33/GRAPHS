@@ -24,6 +24,10 @@ def async_fluid(graph, expected_com_count):
     generator = community.asyn_fluidc(graph, k=expected_com_count)
     return list(generator)
 
+def label_propagation_communities(graph):
+    generator = community.label_propagation_communities(graph)
+    return list(generator)
+
 
 class NetworkxBenchmark(Benchmark):
     def __init__(self, config: Benchmark.Configuration):
@@ -45,31 +49,37 @@ class NetworkxBenchmark(Benchmark):
         if (self._config.algorithm == "girvan_newman"):
             self._communities = self._measure_time_and_get_results(girvan_newman, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
-            write_com_to_file(self._communities, "networkx/async_fluid")
+            write_com_to_file(self._communities, "networkx/girvan_newman")
 
         elif (self._config.algorithm == "async_fluid"):
             self._communities = self._measure_time_and_get_results(async_fluid, self._graph, self._expected_communities_count)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/async_fluid")
 
         elif (self._config.algorithm == "asyn_lpa_communities"):
             self._communities = self._measure_time_and_get_results(async_lpa_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/asyn_lpa_communities")
 
         elif (self._config.algorithm == "label_propagation_communities"):
-            self._communities = self._measure_time_and_get_results(community.label_propagation_communities, self._graph)
+            self._communities = self._measure_time_and_get_results(label_propagation_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/label_propagation_communities")
 
         elif (self._config.algorithm == "lukes_partitioning"):
             self._communities = self._measure_time_and_get_results(community.lukes_partitioning, self._graph, self._max_weight)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/lukes_partitioning")
 
         elif (self._config.algorithm == "greedy_modularity_communities"):
             self._communities = self._measure_time_and_get_results(community.greedy_modularity_communities, self._graph)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/greedy_modularity_communities")
 
         elif (self._config.algorithm == "k_clique_communities"):
             self._communities = self._measure_time_and_get_results(community.k_clique_communities, self._graph, self._k)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            write_com_to_file(self._communities, "networkx/k_clique_communities")
 
         else:
             raise AlgorithmNotFound(self._config.lib)
