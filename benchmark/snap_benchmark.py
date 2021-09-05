@@ -2,7 +2,7 @@ from benchmark.base_benchmark import Benchmark
 from snap.snap import *
 from benchmark.base_benchmark import AlgorithmNotFound
 from evaluation.snap_evaluator import SnapEvaluator
-from benchmark.serialization.serialization import  write_com_to_file
+from benchmark.serialization.serialization import  write_com_to_file, get_com_path
 
 
 class SnapBenchmark(Benchmark):
@@ -22,13 +22,13 @@ class SnapBenchmark(Benchmark):
             result = self._measure_time_and_get_results(self._graph.CommunityCNM)
             modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
-            write_com_to_file(com, "snap/cnm")
+            write_com_to_file(com, get_com_path(self._config))
 
         elif(self._config.algorithm == "CommunityGirvanNewman"):
             result = self._measure_time_and_get_results(self._graph.CommunityGirvanNewman)
             modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
-            write_com_to_file(com, "snap/girvan_newman")
+            write_com_to_file(com, get_com_path(self._config))
 
         else:
             raise AlgorithmNotFound(self._config.lib)

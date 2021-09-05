@@ -3,7 +3,7 @@ import graph_tool.all as gt
 from networkx.readwrite.edgelist import read_edgelist
 from data.utils import nx2gt
 import numpy as np
-from benchmark.serialization.serialization import write_com_to_file
+from benchmark.serialization.serialization import write_com_to_file, get_com_path
 from evaluation.graphtool_evaluator import GraphToolEvaluator
 from benchmark.base_benchmark import AlgorithmNotFound
 from collections import defaultdict
@@ -50,21 +50,21 @@ class GraphToolBenchmark(Benchmark):
             state = self._measure_time_and_get_results(gt.minimize_blockmodel_dl, self._graph)
             self._communities = extract_communities(state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
-            write_com_to_file(self._communities, "graph_tool/minimize_blockmodel")
+            write_com_to_file(self._communities, get_com_path(self._config))
 
         elif self._config.algorithm == "multiflip_mcmc_sweep":
             state = gt.minimize_blockmodel_dl(self._graph)
             updated_state = self._measure_time_and_get_results(multiflip_mcmc_sweep, state)
             self._communities = extract_communities(updated_state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
-            write_com_to_file(self._communities, "graph_tool/multiflip_mcmc_sweep")
+            write_com_to_file(self._communities, get_com_path(self._config))
 
         elif self._config.algorithm == "mcmc_anneal":
             state = gt.minimize_blockmodel_dl(self._graph)
             updated_state = self._measure_time_and_get_results(mcmc_anneal, state)
             self._communities = extract_communities(updated_state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
-            write_com_to_file(self._communities, "graph_tool/mcmc_anneal")
+            write_com_to_file(self._communities, get_com_path(self._config))
 
         else:
             raise AlgorithmNotFound(self._config.lib)
