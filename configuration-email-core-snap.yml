@@ -1,7 +1,7 @@
 ### SNAP
 SnapCNMEmailCore:
   lib: "snap"
-  dataset_path: "storage/email-Eu-core-manual-undirected-0.txt"
+  dataset_path: "storage/email-Eu-core-manual-undirected-0-test.txt"
   algorithm: "CNM"
   gt_path: "storage/email-Eu-core-department-labels-0.txt"
-  gt_is_overlapping: True
+  gt_is_overlapping: False

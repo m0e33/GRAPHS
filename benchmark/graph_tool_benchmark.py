@@ -3,8 +3,11 @@ import graph_tool.all as gt
 from networkx.readwrite.edgelist import read_edgelist
 from data.utils import nx2gt
 import numpy as np
+import pyintergraph
 from evaluation.graphtool_evaluator import GraphToolEvaluator
 from benchmark.base_benchmark import AlgorithmNotFound
+from networkx.relabel import convert_node_labels_to_integers
+
 
 def multiflip_mcmc_sweep(state):
     for i in range(1):  # this should be sufficiently large
@@ -22,7 +25,9 @@ class GraphToolBenchmark(Benchmark):
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
         nxgraph = read_edgelist(self._config.dataset_path)
-        self._graph = nx2gt(nxgraph)
+        # self._graph = nx2gt(nxgraph)
+        self._graph = pyintergraph.nx2gt(nxgraph, labelname="node_label")
+
         nodes, edges = self._graph.num_vertices(), self._graph.num_edges()
         self._logger.info(self._logger_prefix + f"Loaded Graph with {nodes} nodes and {edges} edges")
 

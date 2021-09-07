@@ -14,22 +14,24 @@ class BenchmarkRunner:
 
     def evaluate(self, execute_fitness: bool = True, execute_partition: bool = True):
         for benchmark in self._benchmarks:
-            benchmark.result.evaluator.evaluate(execute_partition, execute_fitness)
+            benchmark.result.evaluator.evaluate(execute_fitness, execute_partition)
 
-    def collect_results(self):
+    def collect_results(self, execute_fitness: bool = True, execute_partition: bool = True):
         for benchmark in self._benchmarks:
             write_results(
-                f"time_{self.current_timestamp}_{benchmark.result.name}.txt",
+                f"results_time/time_{self.current_timestamp}_{benchmark.result.name}.txt",
                 asdict(benchmark.result),
                 list(asdict(benchmark.result).keys()),
             )
-            write_results(
-                f"fitness_{self.current_timestamp}_{benchmark.result.name}.txt",
-                benchmark.result.evaluator.fitness_results,
-                list(benchmark.result.evaluator.fitness_results.keys()),
-            )
-            write_results(
-                f"partition_{self.current_timestamp}_{benchmark.result.name}.txt",
-                benchmark.result.evaluator.partition_results,
-                list(benchmark.result.evaluator.partition_results.keys()),
-            )
+            if execute_fitness:
+                write_results(
+                    f"results_fitness/fitness_{self.current_timestamp}_{benchmark.result.name}.txt",
+                    benchmark.result.evaluator.fitness_results,
+                    list(benchmark.result.evaluator.fitness_results.keys()),
+                )
+            if execute_partition:
+                write_results(
+                    f"results_partition/partition_{self.current_timestamp}_{benchmark.result.name}.txt",
+                    benchmark.result.evaluator.partition_results,
+                    list(benchmark.result.evaluator.partition_results.keys()),
+                )

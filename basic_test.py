@@ -3,11 +3,14 @@ import distutils.util
 from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
 from benchmark.benchmark_runner import BenchmarkRunner
-import sys
 import argparse
+from datetime import datetime
 
-
+timestamp = datetime.now().strftime("%d-%b-%Y_%H:%M:%S")
 logging.basicConfig(level=logging.DEBUG)
+rootLogger = logging.getLogger()
+fileHandler = logging.FileHandler(f"logs/{timestamp}.log")
+rootLogger.addHandler(fileHandler)
 
 if __name__ == "__main__":
     logging.info(
@@ -20,8 +23,8 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
     parser.add_argument('config', type=str, help='Execute partition evaluation')
-    parser.add_argument('execute_fitness', type=bool, help='Execute fitness evaluation')
-    parser.add_argument('execute_partition', type=bool, help='Execute partition evaluation')
+    parser.add_argument('-execute_fitness', action='store_true', help='Execute fitness evaluation')
+    parser.add_argument('-execute_partition', action='store_true', help='Execute partition evaluation')
 
     args = parser.parse_args()
     config = args.config
@@ -50,7 +53,7 @@ if __name__ == "__main__":
                 logging.error("Failed to EVALUATE '" + configuration + "': " + str(e))
 
             try:
-                runner.collect_results()
+                runner.collect_results(execute_fitness, execute_partition)
             except Exception as e:
                 logging.error(
                     "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e)

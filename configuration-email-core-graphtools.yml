@@ -3,8 +3,22 @@
 ### Graphtools
 GraphtoolMinimizeBlockmodelEmailCore:
   lib: "graphtool"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
+  dataset_path: "storage_new/email-Eu-core-relabled-undirected.txt"
   algorithm: "minimze_blockmodel"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+GraphtoolMultiflipMcmcSweepEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage_new/email-Eu-core-relabled-undirected.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+GraphtoolMcmcAnnealEmailCore:
+  lib: "graphtool"
+  dataset_path: "storage_new/email-Eu-core-relabled-undirected.txt"
+  algorithm: "mcmc_anneal"
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: False
 

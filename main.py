@@ -14,10 +14,18 @@ execute_fitness = args.execute_fitness
 execute_partition = args.execute_partition
 mem_profiling = args.mem_profiling
 
+def _build_python_command():
+    command = ["python3", "basic_test.py", config_path]
+    command.extend(["-execute_fitness"] if execute_fitness else [])
+    command.extend(["-execute_partition"] if execute_partition else [])
+    return command
+
+
+command = _build_python_command()
+
 if mem_profiling:
     current_time = datetime.now().strftime("%d-%b-%Y_%H:%M:%S")
     output_name = f"{current_time}--{config_path.split('/')[-1]}"
-    subprocess.run(["mprof", "run", "--include-children", "--multiprocess", "--output", f"./mem_logs/{output_name}", "--python", "python3", "basic_test.py", str(config_path), str(execute_fitness), str(execute_partition)])
+    subprocess.run(["mprof", "run", "--include-children", "--multiprocess", "--output", f"./mem_logs/{output_name}", "--python"].extend(command))
 else:
-    subprocess.run(
-        ["python3", "basic_test.py", config_path, str(execute_fitness), str(execute_partition)])
+    subprocess.run(command)
