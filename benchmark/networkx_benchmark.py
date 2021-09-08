@@ -1,4 +1,3 @@
-import numpy.random
 from benchmark.base_benchmark import Benchmark
 from networkx.readwrite.edgelist import read_edgelist
 from networkx.algorithms import community

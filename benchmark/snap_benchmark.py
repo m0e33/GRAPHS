@@ -2,7 +2,6 @@ from benchmark.base_benchmark import Benchmark
 from snap.snap import *
 from benchmark.base_benchmark import AlgorithmNotFound
 from evaluation.snap_evaluator import SnapEvaluator
-from benchmark.serialization.serialization import  write_com_to_file, get_com_path
 
 
 class SnapBenchmark(Benchmark):
