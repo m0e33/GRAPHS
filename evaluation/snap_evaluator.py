@@ -1,7 +1,6 @@
 from cdlib import NodeClustering
 from networkx.relabel import convert_node_labels_to_integers
 from networkx.readwrite import read_edgelist
-
 from evaluation.base_evaluator import BaseEvaluator
 
 
@@ -9,7 +8,6 @@ class SnapEvaluator(BaseEvaluator):
     def __init__(self, graph, communities, config):
         self._orig_graph = convert_node_labels_to_integers(read_edgelist(config.dataset_path), first_label=1)
         super(SnapEvaluator, self).__init__(graph, communities, config)
-
 
     def purity(self):
         self._logger.info(self._logger_prefix + "Computing purity")
@@ -20,7 +18,6 @@ class SnapEvaluator(BaseEvaluator):
                max_intersect = max(len(ac_cmty.intersection(gt_cmty)), max_intersect)
             sum_intersect += max_intersect
         return sum_intersect / self._get_number_of_nodes()
-
 
     def _convert_cmtys_to_node_clusterings(self):
         self._logger.info(self._logger_prefix + "Converting Snap Communities to actual python sets")

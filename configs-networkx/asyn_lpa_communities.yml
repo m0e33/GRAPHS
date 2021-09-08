@@ -4,3 +4,4 @@ Networkx_asyn_lpa_communities_email: # just for evaluation purposes
   algorithm: "asyn_lpa_communities"
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: False
+  write_cmtys_to_file: True
