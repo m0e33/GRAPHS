@@ -24,14 +24,20 @@ class SnapBenchmark(Benchmark):
             result = self._measure_time_and_get_results(self._graph.CommunityCNM)
             modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
+            self._communities = com
+            self.maybe_write_cmtys_to_file(self._communities)
 
         elif(self._config.algorithm == "CommunityGirvanNewman"):
             result = self._measure_time_and_get_results(self._graph.CommunityGirvanNewman)
             modularity, com = result
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection: modularity: {modularity}")
+            self._communities = com
+            self.maybe_write_cmtys_to_file(self._communities)
 
         else:
             raise AlgorithmNotFound(self._config.lib)
+
+        # write com to file.
 
         self.result.evaluator = SnapEvaluator(self._graph, com, self._config)
 

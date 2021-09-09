@@ -3,11 +3,12 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
 import logging
+from benchmark.serialization.serialization import write_com_to_file, get_com_path
 # from memory_profiler import profile
 from evaluation.base_evaluator import BaseEvaluator
 
 
-STREAM = open('memory_profiler.log','w')
+STREAM = open('memory_profiler.log', 'w')
 
 @dataclass
 class BenchmarkResult:
@@ -40,6 +41,9 @@ class Benchmark(ABC):
 
         gt_is_overlapping: bool
         """True if ground-truth communites are overlapping"""
+
+        write_cmtys_to_file: bool = False
+        """Set to true, if you want the algorithms results to be serialized in a text file, standard: false"""
 
     def __init__(self, config: Configuration):
         self._config = config
@@ -74,9 +78,12 @@ class Benchmark(ABC):
         self._logger.info(f"{total_normal} seconds for algorithm")
         return result
 
+    def maybe_write_cmtys_to_file(self, communities):
+        if self._config.write_cmtys_to_file:
+            write_com_to_file(communities, get_com_path(self._config))
+
     def __repr__(self):
         return str(self._config)
-
 
 
 class AlgorithmNotFound(Exception):

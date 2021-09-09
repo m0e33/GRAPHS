@@ -44,7 +44,6 @@ if __name__ == "__main__":
                 runner.run()
             except Exception as e:
                 logging.error("Failed to RUN '" + configuration + "': " + str(e))
-
             try:
                 runner.evaluate(
                     execute_fitness=execute_fitness, execute_partition=execute_partition
