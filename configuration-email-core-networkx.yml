@@ -1,16 +1,10 @@
 # Benchmark configurations
 ## E-Mail Core (directed, not overlapping)
 ### NetworkX
-NetworkXCommunityGirvanNewmanEmailCore:
-  lib: "networkx"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
-  algorithm: "girvan_newman"
-  gt_path: "storage/email-Eu-core-department-labels.txt"
-  gt_is_overlapping: False
 
 NetworkXAsyncLPAcommunitiesEmailCore:
   lib: "networkx"
-  dataset_path: "storage/email-Eu-core-undirected.txt"
+  dataset_path: "storage/email-Eu-core-manual-undirected-0.txt"
   algorithm: "asyn_lpa_communities"
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: False
@@ -19,5 +13,40 @@ NetworkXLabelPropagationsEmailCore:
   lib: "networkx"
   dataset_path: "storage/email-Eu-core-undirected.txt"
   algorithm: "label_propagation_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+LukesPartitioningEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "lukes_partitioning"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+GreedyModularityCommunitiesEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "greedy_modularity_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+AsyncFluidEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "async_fluid"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+KCliqueCommunitiesEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "k_clique_communities"
+  gt_path: "storage/email-Eu-core-department-labels.txt"
+  gt_is_overlapping: False
+
+NetworkXCommunityGirvanNewmanEmailCore:
+  lib: "networkx"
+  dataset_path: "storage/email-Eu-core-undirected.txt"
+  algorithm: "girvan_newman"
   gt_path: "storage/email-Eu-core-department-labels.txt"
   gt_is_overlapping: False

@@ -11,7 +11,11 @@
     <option name="format" value="PLAIN" />
     <option name="myDocStringFormat" value="Plain" />
   </component>
-  <component name="TestRunnerService">
-    <option name="PROJECT_TEST_RUNNER" value="pytest" />
+  <component name="TemplatesService">
+    <option name="TEMPLATE_FOLDERS">
+      <list>
+        <option value="$MODULE_DIR$/.venv/lib/python3.9/site-packages/pandas/io/formats/templates" />
+      </list>
+    </option>
   </component>
 </module>

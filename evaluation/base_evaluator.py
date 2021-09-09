@@ -1,10 +1,11 @@
 from abc import ABC, abstractmethod
 from enum import Enum
-from networkx.readwrite.edgelist import read_edgelist
-from networkx.relabel import convert_node_labels_to_integers
 import logging
+
 from cdlib import NodeClustering
 from cdlib.evaluation import *
+from collections import Counter
+from tabulate import tabulate
 
 
 class ImportMode(Enum):
@@ -16,6 +17,7 @@ class BaseEvaluator(ABC):
     def __init__(self, graph, communities, config):
         self._graph = graph
         self._communities = communities
+        self._gt_communites = None
         self._config = config
         self._gt_cmty_nc = None
         self._ac_cmty_nc = None
@@ -26,6 +28,30 @@ class BaseEvaluator(ABC):
         self._logger = logging.getLogger(type(self).__name__)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
 
+    def _analyze_communities(self, communities, log_string = ""):
+        self._logger.info(self._logger_prefix + f"Number of communities: {len(communities)}")
+
+        lens = list(map(lambda com: len(com), communities))
+        values = list(Counter(lens).keys())
+        counts = list(Counter(lens).values())
+        self._logger.info(self._logger_prefix + f"Node distribution over communities ({log_string})")
+        self._logger.info(f"\n{tabulate([[value, count] for value, count in zip(values, counts)], headers=['Node Count in Com', 'Com Count'])}")
+
+    def _compare_node_sets(self, com1, com2):
+        com1_set = set([node for com in com1 for node in com])
+        com2_set = set([node for com in com2 for node in com])
+
+        self._logger.info(self._logger_prefix + f"Len com1: {len(com1_set)}")
+        self._logger.info(self._logger_prefix + f"Len com1: {len(com2_set)}")
+
+        self._logger.info(self._logger_prefix + f"Smallest node in com1: {min(com1_set)}")
+        self._logger.info(self._logger_prefix + f"Smallest node in com2: {min(com2_set)}")
+
+        self._logger.info(self._logger_prefix + f"Biggest node in com1: {max(com1_set)}")
+        self._logger.info(self._logger_prefix + f"Biggest node in com2: {max(com2_set)}")
+
+        self._logger.info(self._logger_prefix + f"Nodes not in Intersection: {com1_set ^ com2_set}")
+
     def evaluate(self, execute_fitness, execute_partition):
         self._logger.info(self._logger_prefix + "Evaluating Results")
         self._logger.info(self._logger_prefix + "Fitness execution flag: " + str(execute_fitness))
@@ -35,6 +61,11 @@ class BaseEvaluator(ABC):
             return
 
         self._convert_cmtys_to_node_clusterings()
+
+        self._analyze_communities(self._communities, "RESULT") # solution communities
+        self._analyze_communities(self._gt_communites, "GROUND TRUTH") # ground truth communities
+
+        self._compare_node_sets(self._communities, self._gt_communites)
 
         def try_method(method):
             self._logger.info(self._logger_prefix + f"Trying to run {method.__name__}")
@@ -65,9 +96,7 @@ class BaseEvaluator(ABC):
                     cmty[-1] = cmty[-1].replace("\n", "")
                     gt_lists.append([int(id) for id in cmty])
 
-        # For Debugging
-        self._unique_values_gt_list = [x for l in gt_lists for x in l]
-        self._unique_values_gt_set = set(self._unique_values_gt_list)
+        self._gt_communites = gt_lists
 
         self._gt_cmty_nc = NodeClustering(gt_lists, graph=self._orig_graph)
 
