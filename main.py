@@ -26,6 +26,8 @@ command = _build_python_command()
 if mem_profiling:
     current_time = datetime.now().strftime("%d-%b-%Y_%H:%M:%S")
     output_name = f"{current_time}--{config_path.split('/')[-1]}"
-    subprocess.run(["mprof", "run", "--include-children", "--multiprocess", "--output", f"./mem_logs/{output_name}", "--python"].extend(command))
+    final_command = ["mprof", "run", "--include-children", "--multiprocess", "--output", f"./mem_logs/{output_name}.dat", "--python"]
+    final_command.extend(command)
+    subprocess.run(final_command)
 else:
     subprocess.run(command)
