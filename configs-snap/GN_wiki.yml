@@ -1,6 +1,6 @@
 Snap_CNM_wiki:
   lib: "snap"
   dataset_path: "storage/wiki-topcats.txt"
-  algorithm: "CNM"
+  algorithm: "CommunityGirvanNewman"
   gt_path: "storage/wiki-topcats-categories.txt"
   gt_is_overlapping: True

@@ -1,0 +1,6 @@
+Graphtool_minimize_blockmodel_mcmc_sweep_email:
+  lib: "graphtool"
+  dataset_path: "storage/email-Eu-core-manual-undirected-0-test.txt"
+  algorithm: "multiflip_mcmc_sweep"
+  gt_path: "storage/email-Eu-core-department-labels-0.txt"
+  gt_is_overlapping: False

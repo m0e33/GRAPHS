@@ -1,0 +1,3 @@
+tmux new -ds graphtool_minimize_blockmodel_dblp 'source /hpi/fs00/share/complexnetSS2021/mosi/anaconda3/profile.d/conda.sh; conda activate snap-env; python3 main.py configs-graphtool/minimize_blockmodel_dblp.yml -mem_profiling; exec $SHELL'
+tmux new -ds graphtool_mcmc_anneal_dblp 'source /hpi/fs00/share/complexnetSS2021/mosi/anaconda3/profile.d/conda.sh; conda init bash; conda activate snap-env; python3 main.py configs-graphtool/mcmc_anneal_dblp.yml -mem_profiling; exec $SHELL'
+tmux new -ds graphtool_multiflip_mcmc_sweep_dblp 'source /hpi/fs00/share/complexnetSS2021/mosi/anaconda3/profile.d/conda.sh; conda init bash; conda activate snap-env; python3 main.py configs-graphtool/multiflip_mcmc_sweep_dblp.yml -mem_profiling; exec $SHELL'

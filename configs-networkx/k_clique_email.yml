@@ -1,6 +1,6 @@
-Snap_CNM_dblp:
-  lib: "snap"
+Networkx_k_clique_communities_email:
+  lib: "networkx"
   dataset_path: "storage/email-Eu-core-manual-undirected-0-test.txt"
-  algorithm: "CNM"
+  algorithm: "k_clique_communities"
   gt_path: "storage/email-Eu-core-department-labels-0.txt"
   gt_is_overlapping: False

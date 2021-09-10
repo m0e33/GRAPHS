@@ -42,7 +42,7 @@ class Benchmark(ABC):
         gt_is_overlapping: bool
         """True if ground-truth communites are overlapping"""
 
-        write_cmtys_to_file: bool = False
+        write_cmtys_to_file: bool = True
         """Set to true, if you want the algorithms results to be serialized in a text file, standard: false"""
 
     def __init__(self, config: Configuration):

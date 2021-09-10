@@ -14,12 +14,12 @@ logging.basicConfig(level=logging.DEBUG)
     #'configs-graphtool/multiflip_mcmc_sweep.yml',
     #'configs-networkx/asyn_lpa_communities.yml',
     #'configs-networkx/async_fluid.yml',
-    #'configs-networkx/girvan_newman.yml',
+    #'configs-networkx/girvan_newman_email.yml',
     #'configs-networkx/greedy_modularity_communities.yml',
     #'configs-networkx/label_propagation_communities.yml',
     #'configs-networkx/lukes_partitioning.yml',
     #'configs-snap/CNM.yml',
-    #'configs-snap/girvan_newman.yml',
+    #'configs-snap/girvan_newman_email.yml',
 #]
 
 configuration_files_snap = ['configs-snap/' + file for file in os.listdir('/Users/simon/Documents/uni/master-itse/02-ss2021/DissectingtheComplex/GRAPHS/configs-snap')]
