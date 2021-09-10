@@ -4,3 +4,4 @@ Networkx_label_propagation_communities_friendster:
   algorithm: "label_propagation_communities"
   gt_path: "storage/com-friendster.all.cmty.txt"
   gt_is_overlapping: True
+  write_cmtys_to_file: True

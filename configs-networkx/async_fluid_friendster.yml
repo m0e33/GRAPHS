@@ -4,3 +4,4 @@ Networkx_async_fluid_friendster:
   algorithm: "async_fluid"
   gt_path: "storage/com-friendster.all.cmty.txt"
   gt_is_overlapping: True
+  write_cmtys_to_file: True
