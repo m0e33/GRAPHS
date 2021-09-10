@@ -1,6 +1,6 @@
 Networkx_girvan_newman_dblp:
   lib: "networkx"
-  dataset_path: "storage/com-dblp.ungraph.txt"
+  dataset_path: "storage/com-dblp.adapted.txt"
   algorithm: "girvan_newman"
   gt_path: "storage/com-dblp.all.cmty.txt"
   gt_is_overlapping: True
