@@ -43,18 +43,18 @@ if __name__ == "__main__":
             try:
                 runner.run()
             except Exception as e:
-                logging.error("Failed to RUN '" + configuration + "': " + str(e))
+                logging.error("Failed to RUN '" + configuration + "': " + str(e), exc_info=True)
             try:
                 runner.evaluate(
                     execute_fitness=execute_fitness, execute_partition=execute_partition
                 )
             except Exception as e:
-                logging.error("Failed to EVALUATE '" + configuration + "': " + str(e))
+                logging.error("Failed to EVALUATE '" + configuration + "': " + str(e), exc_info=True)
 
             try:
                 runner.collect_results(execute_fitness, execute_partition)
             except Exception as e:
                 logging.error(
-                    "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e)
+                    "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e), exc_info=True
                 )
             logging.info("Finished to run '" + configuration + "'\n")

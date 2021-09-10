@@ -8,17 +8,7 @@ from evaluation.graphtool_evaluator import GraphToolEvaluator
 from benchmark.base_benchmark import AlgorithmNotFound
 from networkx.relabel import convert_node_labels_to_integers
 from collections import defaultdict
-
-
-def extract_communities(state):
-    # hacky and not very cost efficient way to extract communities in the way we want it.
-
-    vertex_mapping = state.get_blocks().get_array()
-    communities = defaultdict(list)
-    for i, e in enumerate(vertex_mapping):
-        communities[e].append(i)
-
-    return communities.values()
+from benchmark.base_benchmark import ISOLATED_NODES_EMAIL
 
 
 def multiflip_mcmc_sweep(state):
@@ -36,11 +26,25 @@ class GraphToolBenchmark(Benchmark):
     def __init__(self, config: Benchmark.Configuration):
         super().__init__(config)
 
+    def _extract_communities(self, state):
+        # hacky and not very cost efficient way to extract communities in the way we want it.
+
+        membership = state.get_blocks()
+        cmty_dict = {}
+        for node in self._graph.vertices():
+            node = int(self._graph.vertex_properties['node_label'][node])
+            cmty = membership[node]
+            if cmty not in cmty_dict.keys():
+                cmty_dict[cmty] = list()
+            cmty_dict[cmty].append(node)
+        return cmty_dict.values()
+
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
-        nxgraph = read_edgelist(self._config.dataset_path)
+        self._graph = read_edgelist(self._config.dataset_path)
+        self._adapt_graph_afert_loading()
         # self._graph = nx2gt(nxgraph)
-        self._graph = pyintergraph.nx2gt(nxgraph, labelname="node_label")
+        self._graph = pyintergraph.nx2gt(self._graph, labelname="node_label")
 
         nodes, edges = self._graph.num_vertices(), self._graph.num_edges()
         self._logger.info(self._logger_prefix + f"Loaded Graph with {nodes} nodes and {edges} edges")
@@ -51,21 +55,21 @@ class GraphToolBenchmark(Benchmark):
 
         if self._config.algorithm == "minimze_blockmodel":
             state = self._measure_time_and_get_results(gt.minimize_blockmodel_dl, self._graph)
-            self._communities = extract_communities(state)
+            self._communities = self._extract_communities(state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
             self.maybe_write_cmtys_to_file(self._communities)
 
         elif self._config.algorithm == "multiflip_mcmc_sweep":
             state = gt.minimize_blockmodel_dl(self._graph)
             updated_state = self._measure_time_and_get_results(multiflip_mcmc_sweep, state)
-            self._communities = extract_communities(updated_state)
+            self._communities = self._extract_communities(updated_state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
             self.maybe_write_cmtys_to_file(self._communities)
 
         elif self._config.algorithm == "mcmc_anneal":
             state = gt.minimize_blockmodel_dl(self._graph)
             updated_state = self._measure_time_and_get_results(mcmc_anneal, state)
-            self._communities = extract_communities(updated_state)
+            self._communities = self._extract_communities(updated_state)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
             self.maybe_write_cmtys_to_file(self._communities)
 
@@ -75,4 +79,3 @@ class GraphToolBenchmark(Benchmark):
         # write communities to file
 
         self.result.evaluator = GraphToolEvaluator(self._graph, self._communities, self._config)
-

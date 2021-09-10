@@ -2,7 +2,7 @@
 ### SNAP
 SnapCommunityGirvanNewmanDBLP:
   lib: "snap"
-  dataset_path: "storage/com-dblp.ungraph.txt"
+  dataset_path: "storage_old/com-dblp.ungraph.txt"
   algorithm: "CommunityGirvanNewman"
-  gt_path: "storage/com-dblp.all.cmty.txt"
+  gt_path: "storage_old/com-dblp.all.cmty.txt"
   gt_is_overlapping: True

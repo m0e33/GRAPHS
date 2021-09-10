@@ -15,16 +15,7 @@ class GraphToolEvaluator(BaseEvaluator):
 
     def _convert_cmtys_to_node_clusterings(self):
         self._logger.info(self._logger_prefix + "Converting GraphTool Communities to CDLib NodeClusterings")
-        membership = self._communities.get_blocks()
-        cmty_dict = {}
-        for node in self._graph.vertices():
-            node = int(self._graph.vertex_properties['node_label'][node])
-            cmty = membership[node]
-            if cmty not in cmty_dict.keys():
-                cmty_dict[cmty] = list()
-            cmty_dict[cmty].append(node)
-        self._communities = cmty_dict.values()
-        self._ac_cmty_nc = NodeClustering(list(cmty_dict.values()), graph=self._orig_graph)
+        self._ac_cmty_nc = NodeClustering(list(self._communities), graph=self._orig_graph)
 
     def _get_number_of_nodes(self):
         return self._graph.get_vertices().shape[0]

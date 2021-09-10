@@ -7,7 +7,7 @@ from benchmark.serialization.serialization import write_com_to_file, get_com_pat
 # from memory_profiler import profile
 from evaluation.base_evaluator import BaseEvaluator
 
-
+ISOLATED_NODES_EMAIL = [580, 633, 648, 653, 658, 660, 670, 675, 684, 691, 703, 711, 731, 732, 744, 746, 772, 798, 808]
 STREAM = open('memory_profiler.log', 'w')
 
 @dataclass
@@ -84,6 +84,12 @@ class Benchmark(ABC):
 
     def __repr__(self):
         return str(self._config)
+
+    def _adapt_graph_afert_loading(self):
+        # networkx
+        if 'email' in self._config.dataset_path:
+            for node in ISOLATED_NODES_EMAIL:
+                self._graph.add_node(node)
 
 
 class AlgorithmNotFound(Exception):

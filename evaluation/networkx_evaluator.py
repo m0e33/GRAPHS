@@ -17,6 +17,7 @@ class NetworkxEvaluator(BaseEvaluator):
         for cmty in tqdm(list(self._communities)):
             cmty_lists.append([int(id) for id in cmty])
 
+        self._communities = cmty_lists
         self._logger.info(self._logger_prefix + "Converting Networkx Communities to CDLib node clusters")
         self._ac_cmty_nc = NodeClustering(cmty_lists, graph=self._orig_graph)
 

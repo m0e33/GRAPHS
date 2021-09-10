@@ -28,6 +28,20 @@ class BaseEvaluator(ABC):
         self._logger = logging.getLogger(type(self).__name__)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
 
+    def _adapt_communities_for_gt(self, result, gt):
+        if "dblp" in self._config.dataset_path:
+            result_set = set([node for com in result for node in com])
+            gt_set = set([node for com in gt for node in com])
+
+            intersection = result_set ^ gt_set
+
+            for node in intersection:
+                for com in result:
+                    if node in com:
+                        com.remove(node)
+
+        return result
+
     def _analyze_communities(self, communities, log_string = ""):
         self._logger.info(self._logger_prefix + f"Number of communities: {len(communities)}")
 
@@ -42,7 +56,7 @@ class BaseEvaluator(ABC):
         com2_set = set([node for com in com2 for node in com])
 
         self._logger.info(self._logger_prefix + f"Len com1: {len(com1_set)}")
-        self._logger.info(self._logger_prefix + f"Len com1: {len(com2_set)}")
+        self._logger.info(self._logger_prefix + f"Len com2: {len(com2_set)}")
 
         self._logger.info(self._logger_prefix + f"Smallest node in com1: {min(com1_set)}")
         self._logger.info(self._logger_prefix + f"Smallest node in com2: {min(com2_set)}")
@@ -60,6 +74,7 @@ class BaseEvaluator(ABC):
         if not execute_fitness and not execute_partition:
             return
 
+        self._communities = self._adapt_communities_for_gt(self._communities, self._gt_communites)
         self._convert_cmtys_to_node_clusterings()
 
         self._analyze_communities(self._communities, "RESULT") # solution communities
@@ -72,7 +87,7 @@ class BaseEvaluator(ABC):
             try:
                 return method().score
             except Exception as e:
-                self._logger.info(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}")
+                self._logger.error(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}", exec_info=True)
                 return None
 
         if execute_fitness:
