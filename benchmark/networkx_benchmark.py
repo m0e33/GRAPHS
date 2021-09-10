@@ -26,7 +26,7 @@ class NetworkxBenchmark(Benchmark):
 
         nodes, edges = self._graph.number_of_nodes(), self._graph.number_of_edges()
         self._logger.info(self._logger_prefix + f"Loaded Graph with {nodes} nodes and {edges} edges")
-        self._expected_communities_count = count_lines(self._config.gt_path)
+        # self._expected_communities_count = count_lines(self._config.gt_path)
 
     def _run_algorithm(self):
         self._logger.info(self._logger_prefix + f"Running Algo for Networkx")
