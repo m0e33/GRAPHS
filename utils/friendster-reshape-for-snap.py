@@ -26,7 +26,7 @@ if __name__=="__main__":
   #     f.write(edge_string)
   count = 0
   with open("../storage/com-friendster.ungraph.txt", "r") as f:
-    with open("../storage_new/com-friendster.ungraph.clean.txt", "w") as write_file:
+    with open("../storage/com-friendster.ungraph.clean.txt", "w") as write_file:
       for idx, line in enumerate(f.readlines()):
         edge = [int(node_id) for node_id in line.split(' ')]
         if edge[0] == edge[1]:
