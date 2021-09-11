@@ -1,4 +1,4 @@
-Snap_CNM_dblp:
+Snap_CNM_email:
   lib: "snap"
   dataset_path: "storage/email-Eu-core-manual-undirected-0-test.txt"
   algorithm: "CNM"
