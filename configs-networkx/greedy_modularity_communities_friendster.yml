@@ -4,3 +4,4 @@ Networkx_greedy_modularity_communities_friendster:
   algorithm: "greedy_modularity_communities"
   gt_path: "storage/com-friendster.all.cmty.txt"
   gt_is_overlapping: True
+  write_cmtys_to_file: True

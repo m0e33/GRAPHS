@@ -4,3 +4,4 @@ Graphtool_minimize_blockmodel_mcmc_sweep_friendster:
   algorithm: "multiflip_mcmc_sweep"
   gt_path: "storage/com-friendster.all.cmty.txt"
   gt_is_overlapping: True
+  write_cmtys_to_file: True
