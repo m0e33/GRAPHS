@@ -4,9 +4,9 @@ from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
 from benchmark.benchmark_runner import BenchmarkRunner
 import argparse
-from datetime import datetime
+from datetime import datetime, timedelta
 
-timestamp = datetime.now().strftime("%d-%b-%Y_%H:%M:%S")
+timestamp = (datetime.utcnow() + timedelta(hours=2)).strftime("%d-%b-%Y_%H:%M:%S.%f")
 logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 rootLogger = logging.getLogger()
 fileHandler = logging.FileHandler(f"logs/{timestamp}.log")
