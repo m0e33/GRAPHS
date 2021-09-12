@@ -1,12 +1,13 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 import logging
+import glob
 
 from cdlib import NodeClustering
 from cdlib.evaluation import *
 from collections import Counter
 from tabulate import tabulate
-
+from benchmark.serialization.serialization import read_com_from_file, get_com_path
 
 class ImportMode(Enum):
     CMTY_PER_LINE = "community_per_line"
@@ -77,8 +78,8 @@ class BaseEvaluator(ABC):
         self._communities = self._adapt_communities_for_gt(self._communities, self._gt_communites)
         self._convert_cmtys_to_node_clusterings()
 
-        self._analyze_communities(self._communities, "RESULT") # solution communities
-        self._analyze_communities(self._gt_communites, "GROUND TRUTH") # ground truth communities
+        self._analyze_communities(self._communities, "RESULT")
+        self._analyze_communities(self._gt_communites, "GROUND TRUTH")
 
         self._compare_node_sets(self._communities, self._gt_communites)
 

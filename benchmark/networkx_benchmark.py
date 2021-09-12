@@ -3,8 +3,6 @@ from networkx.readwrite.edgelist import read_edgelist
 from networkx.algorithms import community
 from benchmark.base_benchmark import AlgorithmNotFound
 from evaluation.networkx_evaluator import NetworkxEvaluator
-from benchmark.utils import count_lines
-from benchmark.base_benchmark import ISOLATED_NODES_EMAIL
 import networkx as nx
 
 
@@ -22,7 +20,7 @@ class NetworkxBenchmark(Benchmark):
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
         self._graph = read_edgelist(self._config.dataset_path)
-        self._adapt_graph_afert_loading()
+        self._adapt_graph_after_loading()
 
         nodes, edges = self._graph.number_of_nodes(), self._graph.number_of_edges()
         self._logger.info(self._logger_prefix + f"Loaded Graph with {nodes} nodes and {edges} edges")
@@ -71,4 +69,7 @@ class NetworkxBenchmark(Benchmark):
         else:
             raise AlgorithmNotFound(self._config.lib)
 
-        self.result.evaluator = NetworkxEvaluator(self._graph, self._communities, self._config)
+        self.result.evaluator = self._get_evaluator(self._communities)
+
+    def _get_evaluator(self, communities):
+        return NetworkxEvaluator(self._graph, communities, self._config)
