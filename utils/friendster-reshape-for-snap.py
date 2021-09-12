@@ -28,15 +28,18 @@ if __name__=="__main__":
   with open("../storage/com-friendster.ungraph.txt", "r") as f:
     with open("../storage/com-friendster.ungraph.clean.txt", "w") as write_file:
       for idx, line in enumerate(f.readlines()):
-        edge = [int(node_id) for node_id in line.split(' ')]
-        if edge[0] == edge[1]:
-          print(idx)
-          count += 1
-          print(f"--{count}")
-          new_edge_string = f"{edge[0]} {edge[0]}\n"
+        try:
+          edge = [int(node_id) for node_id in line.split(' ')]
+          if edge[0] == edge[1]:
+            print(idx)
+            count += 1
+            print(f"--{count}")
+            new_edge_string = f"{edge[0]} {edge[0]}\n"
+            continue
+          else:
+            write_file.write(line)
+        except Exception as e:
           continue
-        else:
-          write_file.write(line)
 #
 # # relabel node in
 # with open('storage/email-Eu-core-department-labels.txt', 'r') as cmtys_old:
