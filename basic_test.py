@@ -7,7 +7,7 @@ import argparse
 from datetime import datetime
 
 timestamp = datetime.now().strftime("%d-%b-%Y_%H:%M:%S")
-logging.basicConfig(level=logging.DEBUG)
+logging.basicConfig(level=logging.DEBUG, format='%(asctime)s %(message)s')
 rootLogger = logging.getLogger()
 fileHandler = logging.FileHandler(f"logs/{timestamp}.log")
 rootLogger.addHandler(fileHandler)
