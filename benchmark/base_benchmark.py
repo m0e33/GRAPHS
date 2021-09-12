@@ -5,7 +5,6 @@ from dataclasses import dataclass
 import time
 import logging
 from benchmark.serialization.serialization import write_com_to_file, get_com_folder_path, read_com_from_file
-# from memory_profiler import profile
 
 ISOLATED_NODES_EMAIL = [580, 633, 648, 653, 658, 660, 670, 675, 684, 691, 703, 711, 731, 732, 744, 746, 772, 798, 808]
 STREAM = open('memory_profiler.log', 'w')
@@ -53,7 +52,7 @@ class Benchmark(ABC):
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
         self._get_graph()
 
-    def run(self) -> None:
+    def run(self,) -> None:
         self._run_algorithm()
 
     def create_evaluator_with_results_file(self):
