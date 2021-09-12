@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
 import logging
-from benchmark.serialization.serialization import write_com_to_file, get_com_path, read_com_from_file
+from benchmark.serialization.serialization import write_com_to_file, get_com_folder_path, read_com_from_file
 # from memory_profiler import profile
 
 ISOLATED_NODES_EMAIL = [580, 633, 648, 653, 658, 660, 670, 675, 684, 691, 703, 711, 731, 732, 744, 746, 772, 798, 808]
@@ -51,13 +51,13 @@ class Benchmark(ABC):
         self._logger = logging.getLogger(self._config.name)
         self.result = BenchmarkResult(self._config.name)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
+        self._get_graph()
 
     def run(self) -> None:
-        self._get_graph()
         self._run_algorithm()
 
     def create_evaluator_with_results_file(self):
-        folder_path = get_com_path(self._config)
+        folder_path = get_com_folder_path(self._config)
         single_file = glob.glob(folder_path + "/communities_*.txt")[0]
         self._logger.info(self._logger_prefix + f"Using results file: {single_file}")
 
@@ -92,7 +92,7 @@ class Benchmark(ABC):
 
     def maybe_write_cmtys_to_file(self, communities):
         if self._config.write_cmtys_to_file:
-            write_com_to_file(communities, get_com_path(self._config))
+            write_com_to_file(communities, get_com_folder_path(self._config))
 
     def __repr__(self):
         return str(self._config)

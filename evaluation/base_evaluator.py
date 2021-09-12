@@ -1,13 +1,10 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 import logging
-import glob
-
 from cdlib import NodeClustering
 from cdlib.evaluation import *
 from collections import Counter
 from tabulate import tabulate
-from benchmark.serialization.serialization import read_com_from_file, get_com_path
 
 class ImportMode(Enum):
     CMTY_PER_LINE = "community_per_line"
@@ -88,7 +85,7 @@ class BaseEvaluator(ABC):
             try:
                 return method().score
             except Exception as e:
-                self._logger.error(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}", exec_info=True)
+                self._logger.error(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}")
                 return None
 
         if execute_fitness:

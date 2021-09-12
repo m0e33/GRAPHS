@@ -30,11 +30,9 @@ if __name__ == "__main__":
         for benchmark in benchmarks:
             runner = BenchmarkRunner([benchmark])
             benchmark.create_evaluator_with_results_file()
-            logging.info("Evaluation using results from file")
-
             try:
                 runner.evaluate(
-                    execute_fitness=True, execute_partition=True, results_from_file=True
+                    execute_fitness=True, execute_partition=True
                 )
             except Exception as e:
                 logging.error("Failed to EVALUATE '" + configuration + "': " + str(e), exc_info=True)

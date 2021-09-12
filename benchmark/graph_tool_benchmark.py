@@ -38,7 +38,6 @@ class GraphToolBenchmark(Benchmark):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
         self._graph = read_edgelist(self._config.dataset_path)
         self._adapt_graph_after_loading()
-        # self._graph = nx2gt(nxgraph)
         self._graph = pyintergraph.nx2gt(self._graph, labelname="node_label")
 
         nodes, edges = self._graph.num_vertices(), self._graph.num_edges()
