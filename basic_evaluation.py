@@ -21,7 +21,7 @@ if __name__ == "__main__":
 
 
     configuration_files = [
-        "configs-graphtool/mcmc_anneal_email.yml"
+        "configs-graphtool/mcmc_anneal_dblp.yml"
     ]
 
     for configuration in configuration_files:
