@@ -52,7 +52,7 @@ if __name__ == "__main__":
                 logging.error("Failed to EVALUATE '" + configuration + "': " + str(e), exc_info=True)
 
             try:
-                runner.collect_results(execute_fitness, execute_partition)
+                runner.collect_results(write_time=True, write_fitness=execute_fitness, write_partition=execute_partition)
             except Exception as e:
                 logging.error(
                     "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e), exc_info=True

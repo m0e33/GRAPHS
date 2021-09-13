@@ -1,15 +1,10 @@
 from benchmark.base_benchmark import Benchmark
 import graph_tool.all as gt
 from networkx.readwrite.edgelist import read_edgelist
-from data.utils import nx2gt
 import numpy as np
 import pyintergraph
 from evaluation.graphtool_evaluator import GraphToolEvaluator
 from benchmark.base_benchmark import AlgorithmNotFound
-from networkx.relabel import convert_node_labels_to_integers
-from collections import defaultdict
-from benchmark.base_benchmark import ISOLATED_NODES_EMAIL
-
 
 def multiflip_mcmc_sweep(state):
     for i in range(1):  # this should be sufficiently large
@@ -42,8 +37,7 @@ class GraphToolBenchmark(Benchmark):
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")
         self._graph = read_edgelist(self._config.dataset_path)
-        self._adapt_graph_afert_loading()
-        # self._graph = nx2gt(nxgraph)
+        self._adapt_graph_after_loading()
         self._graph = pyintergraph.nx2gt(self._graph, labelname="node_label")
 
         nodes, edges = self._graph.num_vertices(), self._graph.num_edges()
@@ -76,6 +70,7 @@ class GraphToolBenchmark(Benchmark):
         else:
             raise AlgorithmNotFound(self._config.lib)
 
-        # write communities to file
+        self.result.evaluator = self._get_evaluator(self._communities)
 
-        self.result.evaluator = GraphToolEvaluator(self._graph, self._communities, self._config)
+    def _get_evaluator(self, communities):
+        return GraphToolEvaluator(self._graph, communities, self._config)

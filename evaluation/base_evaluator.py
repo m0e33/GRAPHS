@@ -1,12 +1,10 @@
 from abc import ABC, abstractmethod
 from enum import Enum
 import logging
-
 from cdlib import NodeClustering
 from cdlib.evaluation import *
 from collections import Counter
 from tabulate import tabulate
-
 
 class ImportMode(Enum):
     CMTY_PER_LINE = "community_per_line"
@@ -77,8 +75,8 @@ class BaseEvaluator(ABC):
         self._communities = self._adapt_communities_for_gt(self._communities, self._gt_communites)
         self._convert_cmtys_to_node_clusterings()
 
-        self._analyze_communities(self._communities, "RESULT") # solution communities
-        self._analyze_communities(self._gt_communites, "GROUND TRUTH") # ground truth communities
+        self._analyze_communities(self._communities, "RESULT")
+        self._analyze_communities(self._gt_communites, "GROUND TRUTH")
 
         self._compare_node_sets(self._communities, self._gt_communites)
 
@@ -87,7 +85,7 @@ class BaseEvaluator(ABC):
             try:
                 return method().score
             except Exception as e:
-                self._logger.error(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}", exec_info=True)
+                self._logger.error(self._logger_prefix + f"Fitness Function failed: {method.__name__} with error: {e}")
                 return None
 
         if execute_fitness:
@@ -105,11 +103,20 @@ class BaseEvaluator(ABC):
     def import_gt(self, mode=ImportMode.CMTY_PER_LINE):
         gt_lists = []
         if mode == ImportMode.CMTY_PER_LINE:
-            with open(self._config.gt_path, "r") as stream:
-                for line in stream:
-                    cmty = line.split("\t")
-                    cmty[-1] = cmty[-1].replace("\n", "")
-                    gt_lists.append([int(id) for id in cmty])
+            if "wiki" in self._config.gt_path:
+                with open(self._config.gt_path, "r") as stream:
+                    for line in stream:
+                        # wiki gt has "category:category_name; 1 3 23 45" as basic community structure.
+                        line = line.split(";")[1][1:]
+                        cmty = line.split(" ")
+                        cmty[-1] = cmty[-1].replace("\n", "")
+                        gt_lists.append([int(id) for id in cmty])
+            else:
+                with open(self._config.gt_path, "r") as stream:
+                    for line in stream:
+                        cmty = line.split("\t")
+                        cmty[-1] = cmty[-1].replace("\n", "")
+                        gt_lists.append([int(id) for id in cmty])
 
         self._gt_communites = gt_lists
 

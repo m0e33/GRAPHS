@@ -1,14 +1,14 @@
 """Quality evaluation of benchmarks"""
+import glob
 from abc import ABC, abstractmethod
 from dataclasses import dataclass
 import time
 import logging
-from benchmark.serialization.serialization import write_com_to_file, get_com_path
-# from memory_profiler import profile
-from evaluation.base_evaluator import BaseEvaluator
+from benchmark.serialization.serialization import write_com_to_file, get_com_folder_path, read_com_from_file
 
 ISOLATED_NODES_EMAIL = [580, 633, 648, 653, 658, 660, 670, 675, 684, 691, 703, 711, 731, 732, 744, 746, 772, 798, 808]
 STREAM = open('memory_profiler.log', 'w')
+
 
 @dataclass
 class BenchmarkResult:
@@ -50,15 +50,26 @@ class Benchmark(ABC):
         self._logger = logging.getLogger(self._config.name)
         self.result = BenchmarkResult(self._config.name)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
-
-    def run(self) -> None:
         self._get_graph()
+
+    def run(self,) -> None:
         self._run_algorithm()
+
+    def create_evaluator_with_results_file(self):
+        folder_path = get_com_folder_path(self._config)
+        single_file = glob.glob(folder_path + "/communities_*.txt")[-1]
+        self._logger.info(self._logger_prefix + f"Using results file: {single_file}")
+
+        self._communities = read_com_from_file(single_file)
+        self.result.evaluator = self._get_evaluator(self._communities)
+
+    @abstractmethod
+    def _get_evaluator(self, communities):
+        pass
 
     @abstractmethod
     def _get_graph(self):
         pass
-
 
     @abstractmethod
     def _run_algorithm(self):
@@ -80,12 +91,12 @@ class Benchmark(ABC):
 
     def maybe_write_cmtys_to_file(self, communities):
         if self._config.write_cmtys_to_file:
-            write_com_to_file(communities, get_com_path(self._config))
+            write_com_to_file(communities, get_com_folder_path(self._config))
 
     def __repr__(self):
         return str(self._config)
 
-    def _adapt_graph_afert_loading(self):
+    def _adapt_graph_after_loading(self):
         # networkx
         if 'email' in self._config.dataset_path:
             for node in ISOLATED_NODES_EMAIL:
