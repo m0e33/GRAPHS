@@ -103,11 +103,20 @@ class BaseEvaluator(ABC):
     def import_gt(self, mode=ImportMode.CMTY_PER_LINE):
         gt_lists = []
         if mode == ImportMode.CMTY_PER_LINE:
-            with open(self._config.gt_path, "r") as stream:
-                for line in stream:
-                    cmty = line.split("\t")
-                    cmty[-1] = cmty[-1].replace("\n", "")
-                    gt_lists.append([int(id) for id in cmty])
+            if "wiki" in self._config.gt_path:
+                with open(self._config.gt_path, "r") as stream:
+                    for line in stream:
+                        # wiki gt has "category:category_name; 1 3 23 45" as basic community structure.
+                        line = line.split(";")[1][1:]
+                        cmty = line.split(" ")
+                        cmty[-1] = cmty[-1].replace("\n", "")
+                        gt_lists.append([int(id) for id in cmty])
+            else:
+                with open(self._config.gt_path, "r") as stream:
+                    for line in stream:
+                        cmty = line.split("\t")
+                        cmty[-1] = cmty[-1].replace("\n", "")
+                        gt_lists.append([int(id) for id in cmty])
 
         self._gt_communites = gt_lists
 
@@ -128,28 +137,28 @@ class BaseEvaluator(ABC):
     def partition_adjusted_rand_index(self):
         return adjusted_rand_index(self._gt_cmty_nc, self._ac_cmty_nc)
 
-    def artition_f1(self):
+    def partition_f1(self):
         return f1(self._ac_cmty_nc, self._gt_cmty_nc)
 
     def partition_normalized_mutual_information(self):
         return normalized_mutual_information(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def artition_nf1(self):
+    def partition_nf1(self):
         return nf1(self._ac_cmty_nc, self._gt_cmty_nc)
 
     def partition_adjustet_normalized_mutual_information(self):
         return adjusted_mutual_information(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def artition_omega(self):
+    def partition_omega(self):
         return omega(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def artition_overlapping_normalized_mutual_information_LFK(self):
+    def partition_overlapping_normalized_mutual_information_LFK(self):
         return overlapping_normalized_mutual_information_LFK(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def artition_overlapping_normalized_mutual_information_MGH(self):
+    def partition_overlapping_normalized_mutual_information_MGH(self):
         return overlapping_normalized_mutual_information_MGH(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def artition_variation_of_information(self):
+    def partition_variation_of_information(self):
         return variation_of_information(self._ac_cmty_nc, self._gt_cmty_nc)
 
     """
@@ -160,65 +169,65 @@ class BaseEvaluator(ABC):
   +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
   """
 
-    def itness_avg_distance(self):
+    def fitness_avg_distance(self):
         return avg_distance(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_avg_embeddedness(self):
+    def fitness_avg_embeddedness(self):
         return avg_embeddedness(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_average_internal_degree(self):
+    def fitness_average_internal_degree(self):
         return average_internal_degree(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_avg_transitivity(self):
+    def fitness_avg_transitivity(self):
         return avg_transitivity(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_conductance(self):
+    def fitness_conductance(self):
         return conductance(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_cut_ratio(self):
+    def fitness_cut_ratio(self):
         return cut_ratio(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_edges_inside(self):
+    def fitness_edges_inside(self):
         return edges_inside(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_expansion(self):
+    def fitness_expansion(self):
         return expansion(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_fraction_over_median_degree(self):
+    def fitness_fraction_over_median_degree(self):
         return fraction_over_median_degree(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_hub_dominance(self):
+    def fitness_hub_dominance(self):
         return hub_dominance(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_internale_edge_density(self):
+    def fitness_internale_edge_density(self):
         return internal_edge_density(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_normalized_cut(self):
+    def fitness_normalized_cut(self):
         return normalized_cut(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_max_odf(self):
+    def fitness_max_odf(self):
         return max_odf(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_avg_odf(self):
+    def fitness_avg_odf(self):
         return avg_odf(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_flake_odf(self):
+    def fitness_flake_odf(self):
         return flake_odf(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_scale_density(self):
+    def fitness_scale_density(self):
         return scaled_density(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_significance(self):
+    def fitness_significance(self):
         return significance(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_size(self):
+    def fitness_size(self):
         return size(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_surprise(self):
+    def fitness_surprise(self):
         return surprise(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_triangle_participation_ratio(self):
+    def fitness_triangle_participation_ratio(self):
         return triangle_participation_ratio(self._orig_graph, self._ac_cmty_nc)
 
-    def itness_purity(self):
+    def fitness_purity(self):
         return purity(self._ac_cmty_nc)

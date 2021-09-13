@@ -6,7 +6,7 @@ from evaluation.base_evaluator import BaseEvaluator
 
 class SnapEvaluator(BaseEvaluator):
     def __init__(self, graph, communities, config):
-        self._orig_graph = convert_node_labels_to_integers(read_edgelist(config.dataset_path), first_label=1)
+        self._orig_graph = read_edgelist(config.dataset_path, nodetype=int)
         super(SnapEvaluator, self).__init__(graph, communities, config)
 
     def purity(self):
