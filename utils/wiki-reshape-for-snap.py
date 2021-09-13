@@ -8,15 +8,10 @@ if __name__=="__main__":
   # # relabel node in graph
   networkx_digraph = read_edgelist('../storage_new/wiki-topcats.txt', create_using=nx.DiGraph)
   networkx_ungraph = networkx_digraph.to_undirected()
-  print(f"is connected? {nx.is_connected(networkx_ungraph)}")
-
-  print(len(list(nx.isolates(networkx_ungraph))))
-  print(networkx_ungraph.number_of_nodes())
-  print(networkx_ungraph.number_of_edges())
-  # # networkx_relabled = nx.relabel.convert_node_labels_to_integers(networkx_ungraph)
+  networkx_relabled = nx.relabel.convert_node_labels_to_integers(networkx_ungraph)
   # # networkx_ungraph_relabeled = nx.relabel_nodes(networkx_ungraph, {'0': str(1006)})
   #
-  # # write_edgelist(networkx_ungraph_relabeled, "../storage_new/email-Eu-core-relabled-undirected.txt", data=False, delimiter=" ")
+  write_edgelist(networkx_relabled, "../storage_new/wiki-topcats.relabled.txt", data=False, delimiter=" ")
   #
   # breakpoint()
   #
@@ -25,8 +20,8 @@ if __name__=="__main__":
   #     edge_string = " ".join([str(int(node)) for node in edge]) + "\n"
   #     f.write(edge_string)
   count = 0
-  with open("../storage_new/wiki-topcats.txt", "r") as f:
-    with open("../storage_new/wiki-topcats.undirected.txt", "w") as write_file:
+  with open("../storage_new/wiki-topcats.relabled.txt", "r") as f:
+    with open("../final_storage/wiki-topcats.undirected.txt", "w") as write_file:
       for idx, line in enumerate(f.readlines()):
         edge = [int(node_id) for node_id in line.split(' ')]
         if edge[0] == edge[1]:
@@ -35,8 +30,8 @@ if __name__=="__main__":
           print(f"--{count}")
           new_edge_string = f"{edge[0]} {edge[0]}\n"
           continue
-        # else:
-          # write_file.write(line)
+        else:
+          write_file.write(line)
 #
 # # relabel node in
 # with open('storage/email-Eu-core-department-labels.txt', 'r') as cmtys_old:
