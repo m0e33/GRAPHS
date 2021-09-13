@@ -6,8 +6,8 @@ from networkx import read_edgelist
 
 if __name__=="__main__":
   # # relabel node in graph
-  #networkx_digraph = read_edgelist('../storage_new/wiki-topcats.txt', create_using=nx.DiGraph)
-  #networkx_ungraph = networkx_digraph.to_undirected()
+  networkx_digraph = read_edgelist('../storage_new/wiki-topcats.txt', create_using=nx.DiGraph)
+  networkx_ungraph = networkx_digraph.to_undirected()
   #print(f"is connected? {nx.is_connected(networkx_ungraph)}")
 
   #print(len(list(nx.isolates(networkx_ungraph))))
@@ -24,23 +24,23 @@ if __name__=="__main__":
   #   for edge in networkx_ungraph.edges():
   #     edge_string = " ".join([str(int(node)) for node in edge]) + "\n"
   #     f.write(edge_string)
-  count = 0
-  with open("../storage/com-friendster.ungraph.txt", "r") as f:
-    with open("../storage/com-friendster.ungraph.clean.txt", "w") as write_file:
-      for idx, line in enumerate(f.readlines()):
-        try:
-          edge = [int(node_id) for node_id in line.split(' ')]
-          if edge[0] == edge[1]:
-            print(idx)
-            count += 1
-            print(f"--{count}")
-            new_edge_string = f"{edge[0]} {edge[0]}\n"
-            continue
-          else:
-            write_file.write(line)
-        except Exception as e:
-          continue
-#
+#   count = 0
+#   with open("../storage/com-friendster.ungraph.txt", "r") as f:
+#     with open("../storage/com-friendster.ungraph.clean.txt", "w") as write_file:
+#       for idx, line in enumerate(f.readlines()):
+#         try:
+#           edge = [int(node_id) for node_id in line.split(' ')]
+#           if edge[0] == edge[1]:
+#             print(idx)
+#             count += 1
+#             print(f"--{count}")
+#             new_edge_string = f"{edge[0]} {edge[0]}\n"
+#             continue
+#           else:
+#             write_file.write(line)
+#         except Exception as e:
+#           continue
+# #
 # # relabel node in
 # with open('storage/email-Eu-core-department-labels.txt', 'r') as cmtys_old:
 #   with open('storage/email-EU-core-department-labels-1005.txt', 'w') as cmtys_new:
