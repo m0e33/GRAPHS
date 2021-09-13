@@ -57,7 +57,7 @@ class Benchmark(ABC):
 
     def create_evaluator_with_results_file(self):
         folder_path = get_com_folder_path(self._config)
-        single_file = glob.glob(folder_path + "/communities_*.txt")[0]
+        single_file = glob.glob(folder_path + "/communities_*.txt")[-1]
         self._logger.info(self._logger_prefix + f"Using results file: {single_file}")
 
         self._communities = read_com_from_file(single_file)
