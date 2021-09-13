@@ -42,6 +42,7 @@ class NetworkxBenchmark(Benchmark):
             self._graph.remove_nodes_from(list(nx.isolates(self._graph)))
             self._communities = self._measure_time_and_get_results(run_networkx_algo, community.asyn_fluidc, self._graph, self._k)
             self._logger.info(self._logger_prefix + f"Succesfully ran community detection.")
+            self.maybe_write_cmtys_to_file(self._communities)
 
         elif (self._config.algorithm == "asyn_lpa_communities"):
             self._communities = self._measure_time_and_get_results(run_networkx_algo, community.asyn_lpa_communities, self._graph)
