@@ -1,0 +1,2 @@
+tmux new -ds snap_dblp_orig_cnm 'source /hpi/fs00/share/complexnetSS2021/mosi/anaconda3/profile.d/conda.sh; conda init bash; conda activate snap-env; python3 main.py -config configs-snap/CNM_dblp_original.yml -mem_profiling; exec $SHELL'
+tmux new -ds snap_dblp_1_cnm 'source /hpi/fs00/share/complexnetSS2021/mosi/anaconda3/profile.d/conda.sh; conda init bash; conda activate snap-env; python3 main.py -config configs-snap/CNM_dblp_1.yml -mem_profiling; exec $SHELL'

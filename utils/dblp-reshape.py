@@ -9,7 +9,7 @@ if __name__=="__main__":
   networkx_graph = read_edgelist('../storage_new/com-dblp.ungraph.txt', delimiter="\t")
   # print(networkx_graph.number_of_nodes())
   # print(networkx_graph.number_of_edges())
-  networkx_relabled = nx.relabel.convert_node_labels_to_integers(networkx_graph)
+  networkx_relabled = nx.relabel.convert_node_labels_to_integers(networkx_graph, first_label=1)
   # # networkx_ungraph_relabeled = nx.relabel_nodes(networkx_ungraph, {'0': str(1006)})
   #
   write_edgelist(networkx_graph, "../final_storage/com-dblp.adapted.txt", data=False, delimiter=" ")
@@ -21,19 +21,19 @@ if __name__=="__main__":
   #     edge_string = " ".join([str(int(node)) for node in edge]) + "\n"
   #     f.write(edge_string)
   # count = 0
-  # with open("../storage_new/com-dblp.ungraph.txt", "r") as f:
-  #   with open("../final_storage/com-dblp.adapted.txt", "w") as write_file:
-  #     for idx, line in enumerate(f.readlines()):
-  #       edge = [int(node_id) for node_id in line.split('\t')]
-  #       if edge[0] == edge[1]:
-  #         print(idx)
-  #         count += 1
-  #         print(f"--{count}")
-  #         new_edge_string = f"{edge[0]} {edge[0]}\n"
-  #         continue
-  #       else:
-  #         new_edge_string = f"{edge[0]} {edge[1]}\n"
-  #         write_file.write(line)
+  with open("../final_storage/com-dblp.adapted.txt", "r") as f:
+    with open("../final_storage/com-dblp.adapted.1.txt", "w") as write_file:
+      for idx, line in enumerate(f.readlines()):
+        edge = [int(node_id) for node_id in line.split(' ')]
+        if edge[0] == edge[1]:
+          print(idx)
+          count += 1
+          print(f"--{count}")
+          new_edge_string = f"{edge[0]} {edge[0]}\n"
+          continue
+        else:
+          new_edge_string = f"{edge[0]} {edge[1]}\n"
+          write_file.write(line)
 #
 # # relabel node in
 # with open('storage/email-Eu-core-department-labels.txt', 'r') as cmtys_old:
