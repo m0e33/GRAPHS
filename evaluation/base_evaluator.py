@@ -110,7 +110,7 @@ class BaseEvaluator(ABC):
                         line = line.split(";")[1][1:]
                         cmty = line.split(" ")
                         cmty[-1] = cmty[-1].replace("\n", "")
-                        gt_lists.append([int(id) for id in cmty])
+                        gt_lists.append([int(id) for id in cmty if id != ""])
             else:
                 with open(self._config.gt_path, "r") as stream:
                     for line in stream:

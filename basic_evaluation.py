@@ -35,20 +35,26 @@ if __name__ == "__main__":
             benchmarks = create_benchmarks_from_config(configuration)
             for benchmark in benchmarks:
                 runner = BenchmarkRunner([benchmark])
-                benchmark.create_evaluator_with_results_file()
                 try:
-                    runner.evaluate(
-                        execute_fitness=True, execute_partition=True
-                    )
-                except Exception as e:
-                    logging.error("Failed to EVALUATE '" + configuration + "': " + str(e), exc_info=True)
+                    benchmark.create_evaluator_with_results_file()
+                    try:
+                        runner.evaluate(
+                            execute_fitness=True, execute_partition=True
+                        )
+                    except Exception as e:
+                        logging.error("Failed to EVALUATE '" + configuration + "': " + str(e), exc_info=True)
 
-                try:
-                    runner.collect_results(write_time=False, write_fitness=True, write_partition=True)
+                    try:
+                        runner.collect_results(write_time=False, write_fitness=True, write_partition=True)
+                    except Exception as e:
+                        logging.error(
+                            "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e), exc_info=True
+                        )
+                    logging.info("Finished to run '" + configuration + "'\n")
                 except Exception as e:
                     logging.error(
-                        "Failed to COLLECT_RESULTS for '" + configuration + "': " + str(e), exc_info=True
+                        f"Failed to load evaluator from file: {str(e)}"
                     )
-                logging.info("Finished to run '" + configuration + "'\n")
+
         else:
             print(f"No configuration found with name '{configuration}'")
