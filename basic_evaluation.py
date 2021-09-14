@@ -22,7 +22,38 @@ if __name__ == "__main__":
 
 
     configuration_files = [
+        "configs-graphtool/minimize_blockmodel_email.yml",
+        "configs-graphtool/mcmc_anneal_email.yml",
+        "configs-graphtool/multiflip_mcmc_sweep_email.yml",
+        "configs-networkx/asyn_lpa_communities_email.yml",
+        "configs-networkx/async_fluid_email.yml",
+        "configs-networkx/greedy_modularity_communities_email.yml",
+        "configs-networkx/k_clique_email.yml",
+        "configs-networkx/label_propagation_communities_email.yml",
+        "configs-networkx/girvan_newman_email.yml",
+        "configs-snap/CNM_email.yml",
+        "configs-snap/GN_email.yml",
+        "configs-graphtool/minimize_blockmodel_dblp.yml",
+        "configs-graphtool/mcmc_anneal_dblp.yml",
+        "configs-graphtool/multiflip_mcmc_sweep_dblp.yml",
+        "configs-networkx/asyn_lpa_communities_dblp.yml",
+        "configs-networkx/async_fluid_dblp.yml",
+        "configs-networkx/greedy_modularity_communities_dblp.yml",
+        "configs-networkx/k_clique_dblp.yml",
+        "configs-networkx/label_propagation_communities_dblp.yml",
+        "configs-networkx/girvan_newman_dblp.yml",
+        "configs-snap/CNM_dblp.yml",
+        "configs-snap/GN_dblp.yml",
+        "configs-graphtool/minimize_blockmodel_wiki.yml",
         "configs-graphtool/mcmc_anneal_wiki.yml",
+        "configs-graphtool/multiflip_mcmc_sweep_wiki.yml",
+        "configs-networkx/asyn_lpa_communities_wiki.yml",
+        "configs-networkx/async_fluid_wiki.yml",
+        "configs-networkx/greedy_modularity_communities_wiki.yml",
+        "configs-networkx/k_clique_wiki.yml",
+        "configs-networkx/label_propagation_communities_wiki.yml",
+        "configs-snap/CNM_wiki.yml",
+        "configs-snap/GN_wiki.yml",
     ]
 
     for configuration in configuration_files:
