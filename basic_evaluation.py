@@ -84,7 +84,7 @@ if __name__ == "__main__":
                     logging.info("Finished to run '" + configuration + "'\n")
                 except Exception as e:
                     logging.error(
-                        f"Failed to load evaluator from file: {str(e)}"
+                        f"Failed to load evaluator / evaluate entirely: {str(e)}"
                     )
 
         else:
