@@ -5,8 +5,8 @@ from evaluation.snap_evaluator import SnapEvaluator
 from benchmark.base_benchmark import ISOLATED_NODES_EMAIL
 
 class SnapBenchmark(Benchmark):
-    def __init__(self, config: Benchmark.Configuration):
-        super().__init__(config)
+    def __init__(self, config: Benchmark.Configuration, load_graph: bool = True):
+        super().__init__(config, load_graph)
 
     def _get_graph(self):
         self._logger.info(self._logger_prefix + f"Loading Graph from path: {self._config.dataset_path}")

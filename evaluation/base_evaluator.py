@@ -149,7 +149,7 @@ class BaseEvaluator(ABC):
     def partition_adjustet_normalized_mutual_information(self):
         return adjusted_mutual_information(self._ac_cmty_nc, self._gt_cmty_nc)
 
-    def partition_omega(self):
+    def artition_omega(self):
         return omega(self._ac_cmty_nc, self._gt_cmty_nc)
 
     def partition_overlapping_normalized_mutual_information_LFK(self):

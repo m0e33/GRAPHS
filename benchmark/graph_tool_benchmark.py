@@ -18,8 +18,8 @@ def mcmc_anneal(state):
 
 
 class GraphToolBenchmark(Benchmark):
-    def __init__(self, config: Benchmark.Configuration):
-        super().__init__(config)
+    def __init__(self, config: Benchmark.Configuration, load_graph: bool = True):
+        super().__init__(config, load_graph)
 
     def _extract_communities(self, state):
         # hacky and not very cost efficient way to extract communities in the way we want it.

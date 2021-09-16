@@ -45,12 +45,12 @@ class Benchmark(ABC):
         write_cmtys_to_file: bool = True
         """Set to true, if you want the algorithms results to be serialized in a text file, standard: false"""
 
-    def __init__(self, config: Configuration):
+    def __init__(self, config: Configuration, load_graph: bool = True):
         self._config = config
         self._logger = logging.getLogger(self._config.name)
         self.result = BenchmarkResult(self._config.name)
         self._logger_prefix = f"{self._config.lib}:{self._config.algorithm}:"
-        self._get_graph()
+        if load_graph: self._get_graph()
 
     def run(self,) -> None:
         self._run_algorithm()

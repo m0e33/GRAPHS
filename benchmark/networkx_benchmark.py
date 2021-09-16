@@ -12,8 +12,8 @@ def run_networkx_algo(algo, *args, **kwargs):
 
 
 class NetworkxBenchmark(Benchmark):
-    def __init__(self, config: Benchmark.Configuration):
-        super().__init__(config)
+    def __init__(self, config: Benchmark.Configuration, load_graph: bool = True):
+        super().__init__(config, load_graph)
         self._k = 10
         self._max_weight = 100
 

@@ -16,7 +16,7 @@ class BenchmarkType(Enum):
     GRAPHTOOL = 'graphtool'
 
 
-def create_benchmarks_from_config(path: str) -> List[Benchmark]:
+def create_benchmarks_from_config(path: str, load_graph: bool = True) -> List[Benchmark]:
     with open(path, 'r') as stream:
         configurations = yaml.safe_load(stream)
 
@@ -25,11 +25,11 @@ def create_benchmarks_from_config(path: str) -> List[Benchmark]:
         lib = BenchmarkType(config['lib'])
         cfg = Benchmark.Configuration(name, **config)
         if lib == BenchmarkType.SNAP:
-            benchmarks.append(SnapBenchmark(cfg))
+            benchmarks.append(SnapBenchmark(cfg, load_graph))
         elif lib == BenchmarkType.NETWORKX:
-            benchmarks.append(NetworkxBenchmark(cfg))
+            benchmarks.append(NetworkxBenchmark(cfg, load_graph))
         elif lib == BenchmarkType.GRAPHTOOL:
-            benchmarks.append(GraphToolBenchmark(cfg))
+            benchmarks.append(GraphToolBenchmark(cfg, load_graph))
         else:
             raise LibNotSupported(lib)
 

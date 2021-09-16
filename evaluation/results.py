@@ -1,40 +1,22 @@
 import glob
-import os
-import itertools
 from benchmark.benchmark_factory import create_benchmarks_from_config
 import logging
-import sys
 from data.csv_writer import append_line
 
 logging.basicConfig(level=logging.DEBUG)
 
-# configuration_files = [
-    #'configs-graphtool/mcmc_anneal.yml',
-    #'configs-graphtool/minimize_blockmodel.yml',
-    #'configs-graphtool/multiflip_mcmc_sweep.yml',
-    #'configs-networkx/asyn_lpa_communities.yml',
-    #'configs-networkx/async_fluid.yml',
-    #'configs-networkx/girvan_newman_email.yml',
-    #'configs-networkx/greedy_modularity_communities.yml',
-    #'configs-networkx/label_propagation_communities.yml',
-    #'configs-networkx/lukes_partitioning.yml',
-    #'configs-snap/CNM.yml',
-    #'configs-snap/girvan_newman_email.yml',
-#]
+configuration_files = [
+    "configs-graphtool/minimize_blockmodel_email.yml",
+    #"configs-snap/GN_wiki.yml",
+]
 
-configuration_files_snap = ['configs-snap/' + file for file in os.listdir('/Users/simon/Documents/uni/master-itse/02-ss2021/DissectingtheComplex/GRAPHS/configs-snap')]
-configuration_files_networkx = ['configs-networkx/' + file for file in os.listdir('/Users/simon/Documents/uni/master-itse/02-ss2021/DissectingtheComplex/GRAPHS/configs-networkx')]
-configuration_files_graphtool = ['configs-graphtool/' + file for file in os.listdir('/Users/simon/Documents/uni/master-itse/02-ss2021/DissectingtheComplex/GRAPHS/configs-graphtool')]
+result_partition_base_path = "../results_partition"
+result_fitness_base_path = "../results_fitness"
+result_time_base_path = "../results_time"
+output_file_path = "../results_collection/results.csv"
 
-
-configuration_files = list(itertools.chain(configuration_files_snap, configuration_files_networkx, configuration_files_graphtool))
-
-results_base_path = sys.argv[1]
-output_file_path = sys.argv[2]
-
-
-sample_fitness_path = results_base_path + "/fitness_*.txt"
-sample_partition_path = results_base_path + "/partition_*.txt"
+sample_fitness_path = result_fitness_base_path + "/fitness_*.txt"
+sample_partition_path = result_partition_base_path + "/partition_*.txt"
 
 
 def build_header_fields():
@@ -56,6 +38,7 @@ def build_header_fields():
             partition_metrics_count += 1
 
     return fields, fitness_metrics_count, partition_metrics_count
+
 
 def deconstruct_name(benchmark_name):
     bn_network = ''
@@ -83,40 +66,46 @@ append_line(output_file_path, header_fields)
 
 for configuration in configuration_files:
     logging.info("Results extraction started for '" + configuration + "'\n")
-    benchmarks = create_benchmarks_from_config("../" + configuration)
+    benchmarks = create_benchmarks_from_config("../" + configuration, load_graph=False)
     for benchmark in benchmarks:
         benchmark_name = benchmark.result.name
 
-        for time_measurement_file in glob.glob(results_base_path + "/time*.txt"):
-            if benchmark_name in time_measurement_file:
-                benchmark_values_row = []
-                network, library, algorythm = deconstruct_name(benchmark_name)
-                benchmark_values_row.append(network)
-                benchmark_values_row.append(library)
-                benchmark_values_row.append(algorythm)
-                corresponding_partition_file = results_base_path + "/partition_" + "_".join([split_part for split_part in time_measurement_file.split("_")[1:]])
-                corresponding_fitness_file = results_base_path + "/fitness_" + "_".join([split_part for split_part in time_measurement_file.split("_")[1:]])
+        time_measurement_files = glob.glob(result_time_base_path + "/time*" + benchmark_name + ".txt")
+        partition_measurement_files = glob.glob(result_partition_base_path + "/partition*" + benchmark_name + ".txt")
+        fitness_measurement_files = glob.glob(result_fitness_base_path + "/fitness*" + benchmark_name + ".txt")
 
-                with open(time_measurement_file, "r") as f:
-                    first_line = f.readline()
-                    time_line = f.readline()
-                    time_value = time_line.split(" ")[2][:-1]
-                    benchmark_values_row.append(time_value)
+        if len(time_measurement_files) != 0 \
+                and len(partition_measurement_files) != 0 \
+                and len(fitness_measurement_files) != 0:
 
-                if len(glob.glob(corresponding_fitness_file)) != 0:
-                    with open(glob.glob(corresponding_fitness_file)[0], "r") as f:
-                        for fitness_metric_line in f:
-                            fitness_metric_value = fitness_metric_line.split(" ")[2][:-1]
-                            benchmark_values_row.append(fitness_metric_value)
-                else:
-                    [benchmark_values_row.append(0) for _ in range(fm_count)]
+            latest_time_measurement = time_measurement_files[-1]
+            latest_partition_measurement = partition_measurement_files[-1]
+            latest_fitness_measurement = fitness_measurement_files[-1]
 
-                if len(glob.glob(corresponding_partition_file)) != 0:
-                    with open(glob.glob(corresponding_partition_file)[0], "r") as f:
-                        for partition_metric_line in f:
-                            partition_metric_value = partition_metric_line.split(" ")[2][:-1]
-                            benchmark_values_row.append(partition_metric_value)
-                else:
-                    [benchmark_values_row.append(0) for _ in range(pm_cunt)]
+            benchmark_values_row = []
+            network, library, algorithm = deconstruct_name(benchmark_name)
+            benchmark_values_row.append(network)
+            benchmark_values_row.append(library)
+            benchmark_values_row.append(algorithm)
 
-                append_line(output_file_path, benchmark_values_row)
+            with open(latest_time_measurement, "r") as f:
+                first_line = f.readline()
+                time_line = f.readline()
+                time_value = time_line.split(" ")[2][:-1]
+                benchmark_values_row.append(time_value)
+
+            with open(glob.glob(latest_fitness_measurement)[0], "r") as f:
+                for fitness_metric_line in f:
+                    fitness_metric_value = fitness_metric_line.split(" ")[2][:-1]
+                    benchmark_values_row.append(fitness_metric_value)
+
+            with open(glob.glob(latest_partition_measurement)[0], "r") as f:
+                for partition_metric_line in f:
+                    partition_metric_value = partition_metric_line.split(" ")[2][:-1]
+                    benchmark_values_row.append(partition_metric_value)
+
+            append_line(output_file_path, benchmark_values_row)
+        else:
+            logging.info(f"No time or no fitness or no partition results found for benchmark '{benchmark_name}', "
+                         f"aborting results collection")
+            continue
